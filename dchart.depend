@@ -1,0 +1,79 @@
+# depslib dependency file v1.0
+1621335027 source:d:\cpp_program\01-fltk\fltk_tst\dchart\main.cpp
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Box.H>
+	<DChartBase.h>
+
+1620149777 c:\fltk\include\fl\fl.h
+	<FL/Fl_Export.H>
+	<FL/Fl_Cairo.H>
+	"fl_utf8.h"
+	"Enumerations.H"
+	<stdio.h>
+	<FL/Fl.H>
+	<FL/Fl_Window.H>
+
+1620149777 c:\fltk\include\fl\fl_export.h
+
+1620149777 c:\fltk\include\fl\fl_cairo.h
+	<FL/Fl_Export.H>
+	<cairo.h>
+
+1620149777 c:\fltk\include\fl\fl_utf8.h
+	"Fl_Export.H"
+	"fl_types.h"
+	<stdio.h>
+	<string.h>
+	<stdlib.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<locale.h>
+	<ctype.h>
+	<wchar.h>
+	<sys/stat.h>
+	<sys/types.h>
+	<sys/stat.h>
+	<X11/Xlocale.h>
+	<X11/Xlib.h>
+	<locale.h>
+
+1620149777 c:\fltk\include\fl\fl_types.h
+
+1620149777 c:\fltk\include\fl\enumerations.h
+	<FL/abi-version.h>
+	"Fl_Export.H"
+	"fl_types.h"
+
+1621227415 c:\fltk\include\fl\abi-version.h
+
+1620149777 c:\fltk\include\fl\fl_window.h
+	<windows.h>
+	"Fl_Group.H"
+	"Fl_Bitmap.H"
+	<stdlib.h>
+
+1620149777 c:\fltk\include\fl\fl_group.h
+	"Fl_Widget.H"
+
+1620149777 c:\fltk\include\fl\fl_widget.h
+	"Enumerations.H"
+	<stdint.h>
+	<stddef.h>
+
+1620149777 c:\fltk\include\fl\fl_bitmap.h
+	"Fl_Image.H"
+
+1620149777 c:\fltk\include\fl\fl_image.h
+	"Enumerations.H"
+	<stdlib.h>
+
+1620149777 c:\fltk\include\fl\fl_box.h
+	"Fl_Widget.H"
+
+1621332681 source:d:\cpp_program\01-fltk\fltk_tst\dchart\src\dchartbase.cpp
+	"DChartBase.h"
+
+1621335027 d:\cpp_program\01-fltk\fltk_tst\dchart\include\dchartbase.h
+	<FL/Fl_Widget.H>
+
