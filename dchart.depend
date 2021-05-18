@@ -71,9 +71,59 @@
 1620149777 c:\fltk\include\fl\fl_box.h
 	"Fl_Widget.H"
 
-1621332681 source:d:\cpp_program\01-fltk\fltk_tst\dchart\src\dchartbase.cpp
+1621336883 source:d:\cpp_program\01-fltk\fltk_tst\dchart\src\dchartbase.cpp
 	"DChartBase.h"
+	<FL/fl_draw.H>
+	<string>
 
-1621335027 d:\cpp_program\01-fltk\fltk_tst\dchart\include\dchartbase.h
+1621336264 d:\cpp_program\01-fltk\fltk_tst\dchart\include\dchartbase.h
 	<FL/Fl_Widget.H>
+
+1620149777 c:\fltk\include\fl\fl_draw.h
+	<FL/x.H>
+	<FL/Enumerations.H>
+	<FL/Fl_Window.H>
+	<FL/Fl_Device.H>
+
+1620149777 c:\fltk\include\fl\x.h
+	"Enumerations.H"
+	"win32.H"
+	"mac.H"
+	<X11/Xlib.h>
+	<X11/Xutil.h>
+	<X11/Xatom.h>
+	"Fl_Window.H"
+
+1620149777 c:\fltk\include\fl\win32.h
+	<windows.h>
+	<FL/Fl_Window.H>
+
+1620149777 c:\fltk\include\fl\mac.h
+	<FL/Fl_Widget.H>
+	<ApplicationServices/ApplicationServices.h>
+	"Fl_Window.H"
+	"../src/Fl_Font.H"
+
+1620149777 c:\fltk\include\fl\fl_device.h
+	<FL/x.H>
+	<FL/Fl_Plugin.H>
+	<FL/Fl_Image.H>
+	<FL/Fl_Bitmap.H>
+	<FL/Fl_Pixmap.H>
+	<FL/Fl_RGB_Image.H>
+	<stdlib.h>
+
+1620149777 c:\fltk\include\fl\fl_plugin.h
+	"Fl_Preferences.H"
+
+1620149777 c:\fltk\include\fl\fl_preferences.h
+	<stdio.h>
+	"Fl_Export.H"
+
+1620149777 c:\fltk\include\fl\fl_pixmap.h
+	"Fl_Image.H"
+	"x.H"
+
+1620149777 c:\fltk\include\fl\fl_rgb_image.h
+	"Fl_Image.H"
 

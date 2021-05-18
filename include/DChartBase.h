@@ -10,6 +10,8 @@ class DChartBase : public Fl_Widget
         DChartBase(int x, int y, int w, int h, const char *label);
         virtual ~DChartBase();
 
+        void test();
+
     protected:
         void draw();
 
