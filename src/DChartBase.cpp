@@ -9,6 +9,13 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     Fl_Widget(x,y,w,h,label)
 {
     //ctor
+    marginTop = 40;
+    marginBottom = 10;
+    marginLeft = 20;
+    marginRight = 20;
+
+    needWidgetBorder = true;
+    needChartBorder = true;
 }
 
 DChartBase::~DChartBase()
@@ -18,8 +25,8 @@ DChartBase::~DChartBase()
 
 void DChartBase::draw()
 {
-    fl_draw_box(FL_ENGRAVED_BOX, this->x(), this->y(), this->w(), this->h(),
-                 FL_BACKGROUND_COLOR);
+    drawWidgetBorder();
+    drawChartBorder();
     draw_label();
     test();
     drawZoomRect();
@@ -92,4 +99,26 @@ int DChartBase::handle(int event)
         return Fl_Widget::handle(event);
     }
 }
+
+void DChartBase::drawWidgetBorder()
+{
+    if (needWidgetBorder) {
+        fl_draw_box(FL_ENGRAVED_BOX, this->x(), this->y(), this->w(), this->h(),
+                 FL_BACKGROUND_COLOR);
+    }
+}
+
+void DChartBase::drawChartBorder()
+{
+    if (needChartBorder) {
+        fl_draw_box(FL_EMBOSSED_BOX,
+                    x() + marginLeft,
+                    y() + marginTop,
+                    w() - marginRight - marginLeft,
+                    h() - marginBottom - marginTop,
+                 FL_BACKGROUND_COLOR);
+    }
+
+}
+
 

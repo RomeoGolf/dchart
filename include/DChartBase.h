@@ -19,6 +19,18 @@ class DChartBase : public Fl_Widget
         bool isZoom;
         bool isRightMouseButtonDown;
 
+        int marginLeft;
+        int marginRight;
+        int marginTop;
+        int marginBottom;
+
+        bool needWidgetBorder;
+        bool needChartBorder;
+        void drawWidgetBorder();
+        void drawChartBorder();
+
+
+
         virtual int handle(int event);
 
     protected:
