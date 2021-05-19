@@ -11,6 +11,7 @@ class DChartBase : public Fl_Widget
         virtual ~DChartBase();
 
         void test();
+        void drawZoomRect();
 
     protected:
         void draw();
