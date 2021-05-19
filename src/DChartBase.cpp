@@ -30,6 +30,7 @@ void DChartBase::draw()
     draw_label();
     test();
     drawZoomRect();
+    series->draw();
 }
 
 void DChartBase::test()
@@ -120,5 +121,11 @@ void DChartBase::drawChartBorder()
     }
 
 }
+
+void DChartBase::addSeries(Series* s)
+{
+    series = s;
+}
+
 
 

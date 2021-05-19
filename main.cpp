@@ -3,6 +3,7 @@
 #include <FL/Fl_Box.H>
 
 #include <DChartBase.h>
+#include <Series.h>
 
 int main (int argc, char ** argv)
 {
@@ -22,6 +23,14 @@ int main (int argc, char ** argv)
 
   window->end ();
   window->show (argc, argv);
+
+  Series *s1 = new Series();
+  s1->addXY(1,10);
+  s1->addXY(2,70);
+  s1->addXY(3,30);
+  s1->addXY(4,50);
+  s1->addXY(5,20);
+  dcb->addSeries(s1);
 
   return(Fl::run());
 }

@@ -2,6 +2,7 @@
 #define DCHARTBASE_H
 
 #include <FL/Fl_Widget.H>
+#include <Series.h>
 
 class DChartBase : public Fl_Widget
 {
@@ -28,6 +29,9 @@ class DChartBase : public Fl_Widget
         bool needChartBorder;
         void drawWidgetBorder();
         void drawChartBorder();
+
+        Series *series;
+        void addSeries(Series *s);
 
 
 
