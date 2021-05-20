@@ -16,7 +16,7 @@ class Series
         Series();
         virtual ~Series();
 
-        std::vector<SeriesData<double>*> data;
+        std::vector<SeriesData<double>> data;
 
         void addXY(double x, double y);
         void draw();

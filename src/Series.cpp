@@ -16,7 +16,7 @@ Series::~Series()
 
 void Series::addXY(double x, double y)
 {
-    data.push_back(new SeriesData<double>(x, y));
+    data.push_back(SeriesData<double>(x, y));
 }
 
 void Series::draw()
@@ -26,7 +26,7 @@ void Series::draw()
 
     fl_begin_line();
     for (int i = 0; i < data.size(); i++) {
-        fl_vertex(data[i]->xValue, data[i]->yValue);
+        fl_vertex(data[i].xValue, data[i].yValue);
     }
 
     fl_end_line();
