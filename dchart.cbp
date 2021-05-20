@@ -12,8 +12,14 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-std=gnu++11" />
+					<Add option="-std=c++11" />
 					<Add option="-g" />
+					<Add directory="include" />
 				</Compiler>
+				<Linker>
+					<Add option="-static" />
+				</Linker>
 			</Target>
 			<Target title="Release">
 				<Option output="bin/Release/dchart" prefix_auto="1" extension_auto="1" />
@@ -23,15 +29,18 @@
 				<Compiler>
 					<Add option="-O2" />
 					<Add option="-s" />
+					<Add directory="include" />
 				</Compiler>
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-DWIN32" />
+			<Add option="-std=gnu++17" />
 			<Add option="-mms-bitfields" />
+			<Add option="-DWIN32" />
 			<Add directory="C:/FLTK/include" />
 		</Compiler>
 		<Linker>
+			<Add option="-static" />
 			<Add library="fltk" />
 			<Add library="ole32" />
 			<Add library="uuid" />
@@ -43,7 +52,11 @@
 			<Add library="kernel32" />
 			<Add directory="C:/FLTK/lib" />
 		</Linker>
+		<Unit filename="include/DChartBase.h" />
+		<Unit filename="include/Series.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/DChartBase.cpp" />
+		<Unit filename="src/Series.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
