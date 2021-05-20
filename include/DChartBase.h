@@ -35,7 +35,7 @@ class DChartBase : public Fl_Widget
 
 
 
-        virtual int handle(int event);
+        virtual int handle(int event) override;
 
     protected:
         void draw();
