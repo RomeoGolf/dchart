@@ -87,8 +87,10 @@ int DChartBase::handle(int event)
         {
             case FL_LEFT_MOUSE :
                 isZoom = true;
+                break;
             case FL_RIGHT_MOUSE :
                 isRightMouseButtonDown = true;
+                break;
         }
         return 1;
     case FL_RELEASE :
@@ -110,10 +112,8 @@ int DChartBase::handle(int event)
             redraw();
             mouseNowX = zoomX;
             mouseNowY = zoomY;
-
-            //std::cout << zoomX << " " << mouseStartX << '\n';
+            return 1;
         }
-
     default :
         return Fl_Widget::handle(event);
     }
