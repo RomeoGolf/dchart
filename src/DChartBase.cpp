@@ -37,7 +37,8 @@ void DChartBase::draw()
         drawWidgetBorder();
         drawChartBorder();
         draw_label();
-        drawZoomRect();
+        if(isZoom)
+            drawZoomRect();
         series->draw();
         fl_end_offscreen();
 
@@ -91,18 +92,22 @@ int DChartBase::handle(int event)
         }
         return 1;
     case FL_RELEASE :
-        isRightMouseButtonDown = false;
+        switch (Fl::event_button())
+        {
+            case FL_LEFT_MOUSE :
+                isZoom = false;
+                redraw();
+                break;
+            case FL_RIGHT_MOUSE :
+                isRightMouseButtonDown = false;
+                break;
+        }
         return 1;
     case FL_DRAG :
         if (isZoom) {
-            zoomX = mouseNowX;
-            zoomY = mouseNowY;
-            redraw();
-
             zoomX = Fl::event_x() - x();
             zoomY = Fl::event_y() - y();
             redraw();
-
             mouseNowX = zoomX;
             mouseNowY = zoomY;
 
