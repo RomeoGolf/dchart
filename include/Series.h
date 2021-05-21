@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "ChartHelper.h"
+
 template<typename T> struct SeriesData
 {
     double xValue;
@@ -13,7 +15,7 @@ template<typename T> struct SeriesData
 class Series
 {
     public:
-        Series();
+        Series(ChartHelper &chartHelper);
         virtual ~Series();
 
         std::vector<SeriesData<double>> data;
@@ -24,6 +26,7 @@ class Series
     protected:
 
     private:
+        ChartHelper &chartHelper;
 };
 
 #endif // SERIES_H

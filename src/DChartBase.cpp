@@ -9,6 +9,7 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     Fl_Widget(x,y,w,h,label)
 {
     //ctor
+
     chartHelper.marginTop = 40;
     chartHelper.marginBottom = 10;
     chartHelper.marginLeft = 20;
@@ -25,6 +26,11 @@ DChartBase::~DChartBase()
 
 void DChartBase::draw()
 {
+    chartHelper.chartRectTop = y() + chartHelper.marginTop;
+    chartHelper.chartRectBottom = y() + h() - chartHelper.marginBottom;
+    chartHelper.chartRectLeft = x() + chartHelper.marginLeft;
+    chartHelper.chartRectRight = x() + w() - chartHelper.marginRight;
+
     drawWidgetBorder();
     drawChartBorder();
     draw_label();

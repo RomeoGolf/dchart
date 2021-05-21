@@ -4,7 +4,7 @@
 #include <FL/fl_draw.H>
 #include <math.h>
 
-Series::Series()
+Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
 }
@@ -26,7 +26,13 @@ void Series::draw()
 
     fl_begin_line();
     for (int i = 0; i < data.size(); i++) {
-        fl_vertex(data[i].xValue, data[i].yValue);
+        double x = data[i].xValue;
+        double y = data[i].yValue;
+
+        int cx = ceil(x * (chartHelper.chartRectRight - chartHelper.chartRectLeft) / 10);
+        int cy = ceil(y * (chartHelper.chartRectBottom - chartHelper.chartRectTop) / 100);
+
+        fl_vertex(cx + chartHelper.chartRectLeft, chartHelper.chartRectBottom - cy);
     }
 
     fl_end_line();
