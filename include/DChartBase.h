@@ -4,11 +4,15 @@
 #include <FL/Fl_Widget.H>
 #include <Series.h>
 
+#include "ChartHelper.h"
+
 class DChartBase : public Fl_Widget
 {
     public:
         DChartBase(int x, int y, int w, int h, const char *label);
         virtual ~DChartBase();
+
+        ChartHelper chartHelper;
 
         void test();
         void drawZoomRect();
@@ -20,11 +24,6 @@ class DChartBase : public Fl_Widget
         bool isZoom;
         bool isRightMouseButtonDown;
 
-        int marginLeft;
-        int marginRight;
-        int marginTop;
-        int marginBottom;
-
         bool needWidgetBorder;
         bool needChartBorder;
         void drawWidgetBorder();
@@ -32,7 +31,6 @@ class DChartBase : public Fl_Widget
 
         Series *series;
         void addSeries(Series *s);
-
 
 
         virtual int handle(int event) override;
