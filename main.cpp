@@ -18,7 +18,7 @@ int main (int argc, char ** argv)
   box->labelfont (FL_BOLD+FL_ITALIC);
   box->labeltype (FL_SHADOW_LABEL);
 
-  DChartBase *dcb = new DChartBase(10, 50, 200, 200, "test");
+  DChartBase *dcb = new DChartBase(10, 50, 200, 200, "");
   dcb->labelsize(21);
   window->resizable(dcb);
 
