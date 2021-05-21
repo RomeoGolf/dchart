@@ -58,9 +58,9 @@ class BasicAxis
 
 
     protected:
+        ChartHelper &chartHelper;
 
     private:
-        ChartHelper &chartHelper;
 };
 
 #endif // BASICAXIS_H

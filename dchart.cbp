@@ -55,11 +55,13 @@
 		<Unit filename="include/BasicAxis.h" />
 		<Unit filename="include/ChartHelper.h" />
 		<Unit filename="include/DChartBase.h" />
+		<Unit filename="include/HorizAxis.h" />
 		<Unit filename="include/Series.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/BasicAxis.cpp" />
 		<Unit filename="src/ChartHelper.cpp" />
 		<Unit filename="src/DChartBase.cpp" />
+		<Unit filename="src/HorizAxis.cpp" />
 		<Unit filename="src/Series.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
