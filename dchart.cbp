@@ -52,10 +52,12 @@
 			<Add library="kernel32" />
 			<Add directory="C:/FLTK/lib" />
 		</Linker>
+		<Unit filename="include/BasicAxis.h" />
 		<Unit filename="include/ChartHelper.h" />
 		<Unit filename="include/DChartBase.h" />
 		<Unit filename="include/Series.h" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/BasicAxis.cpp" />
 		<Unit filename="src/ChartHelper.cpp" />
 		<Unit filename="src/DChartBase.cpp" />
 		<Unit filename="src/Series.cpp" />
