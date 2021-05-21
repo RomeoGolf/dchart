@@ -29,10 +29,10 @@ void Series::draw()
         double x = data[i].xValue;
         double y = data[i].yValue;
 
-        int cx = ceil(x * (chartHelper.chartRectRight - chartHelper.chartRectLeft) / 10);
-        int cy = ceil(y * (chartHelper.chartRectBottom - chartHelper.chartRectTop) / 100);
+        int cx = ceil(x * (chartHelper.chartRectRight - chartHelper.chartRectLeft) / 10) + chartHelper.marginLeft;
+        int cy = chartHelper.chartRectBottom - ceil(y * (chartHelper.chartRectBottom - chartHelper.chartRectTop) / 100);
 
-        fl_vertex(cx + chartHelper.chartRectLeft, chartHelper.chartRectBottom - cy);
+        fl_vertex(cx, cy);
     }
 
     fl_end_line();

@@ -35,7 +35,7 @@ class ChartHelper
         int marginRight;
         int marginTop;
         int marginBottom;
-
+        // coordinates from a widget border to a chart area
         int chartRectLeft;
         int chartRectRight;
         int chartRectTop;

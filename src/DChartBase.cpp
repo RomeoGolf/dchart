@@ -26,16 +26,24 @@ DChartBase::~DChartBase()
 
 void DChartBase::draw()
 {
-    chartHelper.chartRectTop = y() + chartHelper.marginTop;
-    chartHelper.chartRectBottom = y() + h() - chartHelper.marginBottom;
-    chartHelper.chartRectLeft = x() + chartHelper.marginLeft;
-    chartHelper.chartRectRight = x() + w() - chartHelper.marginRight;
+    chartHelper.chartRectTop = chartHelper.marginTop;
+    chartHelper.chartRectBottom = h() - chartHelper.marginBottom;
+    chartHelper.chartRectLeft = chartHelper.marginLeft;
+    chartHelper.chartRectRight = w() - chartHelper.marginRight;
 
-    drawWidgetBorder();
-    drawChartBorder();
-    draw_label();
-    drawZoomRect();
-    series->draw();
+    Fl_Offscreen oscr = fl_create_offscreen(w(), h());
+    {
+        fl_begin_offscreen(oscr);
+        drawWidgetBorder();
+        drawChartBorder();
+        draw_label();
+        drawZoomRect();
+        series->draw();
+        fl_end_offscreen();
+
+        fl_copy_offscreen(x(), y(), w(), h(), oscr, 0, 0);
+    }
+    fl_delete_offscreen(oscr);
 }
 
 void DChartBase::test()
@@ -69,10 +77,10 @@ int DChartBase::handle(int event)
     switch (event)
     {
     case FL_PUSH :
-        mouseStartX = Fl::event_x();
-        mouseNowX = Fl::event_x();
-        mouseStartY = Fl::event_y();
-        mouseNowY = Fl::event_y();
+        mouseStartX = Fl::event_x() - x();
+        mouseNowX = Fl::event_x() - x();
+        mouseStartY = Fl::event_y() - y();
+        mouseNowY = Fl::event_y() - y();
 
         switch (Fl::event_button())
         {
@@ -91,14 +99,14 @@ int DChartBase::handle(int event)
             zoomY = mouseNowY;
             redraw();
 
-            zoomX = Fl::event_x();
-            zoomY = Fl::event_y();
+            zoomX = Fl::event_x() - x();
+            zoomY = Fl::event_y() - y();
             redraw();
 
             mouseNowX = zoomX;
             mouseNowY = zoomY;
 
-            std::cout << zoomX << " " << mouseStartX << '\n';
+            //std::cout << zoomX << " " << mouseStartX << '\n';
         }
 
     default :
@@ -109,7 +117,7 @@ int DChartBase::handle(int event)
 void DChartBase::drawWidgetBorder()
 {
     if (needWidgetBorder) {
-        fl_draw_box(FL_ENGRAVED_BOX, this->x(), this->y(), this->w(), this->h(),
+        fl_draw_box(FL_ENGRAVED_BOX, 0, 0, w(), h(),
                  FL_BACKGROUND_COLOR);
     }
 }
@@ -118,8 +126,8 @@ void DChartBase::drawChartBorder()
 {
     if (needChartBorder) {
         fl_draw_box(FL_EMBOSSED_BOX,
-                    x() + chartHelper.marginLeft,
-                    y() + chartHelper.marginTop,
+                    /*x() +*/ chartHelper.marginLeft,
+                    /*y() +*/ chartHelper.marginTop,
                     w() - chartHelper.marginRight - chartHelper.marginLeft,
                     h() - chartHelper.marginBottom - chartHelper.marginTop,
                  FL_BACKGROUND_COLOR);
