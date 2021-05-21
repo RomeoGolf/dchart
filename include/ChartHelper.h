@@ -30,16 +30,17 @@ class ChartHelper
     function GetLimit(PAxis : TPersistent) : TAxisLimit;
         */
 
-    int marginLeft;
-    int marginRight;
-    int marginTop;
-    int marginBottom;
+        // margins from a widget border to a chart area
+        int marginLeft;
+        int marginRight;
+        int marginTop;
+        int marginBottom;
 
-    int left;
-    int right;
-    int top;
-    int bottom;
-    bool isZoomed;
+        int chartRectLeft;
+        int chartRectRight;
+        int chartRectTop;
+        int chartRectBottom;
+        bool isZoomed;
 
     protected:
 
