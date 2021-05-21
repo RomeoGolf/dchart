@@ -34,7 +34,6 @@ void DChartBase::draw()
     drawWidgetBorder();
     drawChartBorder();
     draw_label();
-    test();
     drawZoomRect();
     series->draw();
 }
