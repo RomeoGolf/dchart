@@ -4,12 +4,14 @@
 #include <Fl/fl_draw.h>
 
 #include <iostream>
+#include <string>
+#include <sstream>
 
 HorizAxis::HorizAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
-    visibleMinimum = -0.5;
-    visibleMaximum = 15;
+    visibleMinimum = 3.8;
+    visibleMaximum = 10.2;
 }
 
 HorizAxis::~HorizAxis()
@@ -26,11 +28,29 @@ void HorizAxis::draw()
     calcStep();
     calcStartMarkUnit();
 
+    std::cout << "axis draw | startMarkUnit = " << startMarkUnit << "\n";
+    std::cout << "axis draw | startMarkUnit = " << startMarkUnit << "\n";
+
+    startlabelValue = round((visibleMinimum + startMarkUnit) * 10) / 10;
+
+    std::cout << "axis draw | startlabelValue = " << startlabelValue << "\n";
+
+    double xlabelValue = startlabelValue;
+    std::stringstream ss;
+    ss << xlabelValue;
+    std::string xLabelString = ss.str();
+
     double nextX = startMarkUnit;
-    std::cout << "axis draw | nextX = " << nextX << "\n";
 
     double x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
     while (x <= chartHelper.chartRectRight) {
+        int labelWidth = fl_width(xLabelString.data());
+        fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
+        xlabelValue = round((xlabelValue + step) * 10) / 10;
+        std::stringstream ss;
+        ss << xlabelValue;
+        xLabelString = ss.str();
+
         fl_line(x, chartHelper.chartRectTop, x, chartHelper.chartRectBottom);
         nextX += step;
         x = chartHelper.chartRectLeft + ceil(nextX * sizeCoeff);
@@ -42,11 +62,34 @@ void HorizAxis::draw()
 void HorizAxis::calcStep()
 {
     double gap = visibleMaximum - visibleMinimum;
+
+    int degree = 1;
+
     if (gap == 0) {
-        step = 0;
+        step = 10;
         return;
+    } else {
+        degree = ceil(log10(gap)) - 2;
     }
-    double maxLabelNum = 10;
-    step = ceil(gap / maxLabelNum);
+    int multipl = ceil(pow(10, degree));
+
+    std::cout << "axis draw | gap = " << gap << "\n";
+    std::cout << "axis draw | degree = " << degree << "\n";
+    std::cout << "axis draw | multipl = " << multipl << "\n";
+
+    step = div(ceil(gap), 5).quot;
+
+    std::cout << "axis draw | step = " << step << "\n";
+
+    if (step > 1) {
+        step = (div(ceil(step), multipl).quot + 1) * multipl;
+        step = round(step / 5) * 5;
+    } else {
+        step = 0.5;
+    }
+
+    std::cout << "axis draw | step = " << step << "\n";
+
+    //if ((step > 1) && (step < 10)) step = 5;
 }
 
