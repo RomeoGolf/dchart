@@ -14,7 +14,6 @@ class BasicAxis
     property DateTime : boolean read FDateTime write SetDateTime;
 
     property InMargin : boolean read FInMargin write SetInMargin;
-    property StartMarkUnit : real read FStartMarkUnit write SetStartMarkUnit;
     property StartLabelValue : real read FStartLabelValue write SetStartLabelValue;
 
     // (max - min), при котором появляются дробные значения шкалы (0 - никогда)
@@ -52,6 +51,7 @@ class BasicAxis
         double visibleUnitSize;
         double sizeCoeff;
         int pixelSize;
+        double startMarkUnit;
 
         virtual void draw() = 0;
         void unZoom();
@@ -59,6 +59,8 @@ class BasicAxis
 
     protected:
         ChartHelper &chartHelper;
+        void setSizeCoeff();
+        void calcStartMarkUnit();
 
     private:
 };

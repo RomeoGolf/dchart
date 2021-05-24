@@ -11,6 +11,7 @@ class HorizAxis : public BasicAxis
         virtual ~HorizAxis();
 
         void draw() override;
+        void calcStep();
 
     protected:
 

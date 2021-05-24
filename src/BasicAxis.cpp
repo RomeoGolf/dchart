@@ -1,5 +1,7 @@
 #include "BasicAxis.h"
 
+#include <math.h>
+
 BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
@@ -18,5 +20,25 @@ void BasicAxis::unZoom()
 {
     visibleMaximum = maximum;
     visibleMinimum = minimun;
+}
+
+void BasicAxis::setSizeCoeff()
+{
+    visibleUnitSize = visibleMaximum - visibleMinimum;
+    if (fabs(visibleUnitSize) < 2.2250738585072014e-308) {
+        sizeCoeff = 1;
+    } else {
+        sizeCoeff = pixelSize / visibleUnitSize;
+    }
+}
+
+void BasicAxis::calcStartMarkUnit()
+{
+    if (fabs(step) > 2.2250738585072014e-308) {
+        startMarkUnit = step - modf(visibleMinimum / step, nullptr) * step;
+        startMarkUnit = (modf(startMarkUnit / step, nullptr) * step);
+    } else {
+        startMarkUnit = 0;
+    }
 }
 

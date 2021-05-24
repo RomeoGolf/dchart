@@ -3,8 +3,11 @@
 
 #include <FL/Fl_Widget.H>
 #include <Series.h>
+#include <BasicAxis.h>
+#include <HorizAxis.h>
 
 #include "ChartHelper.h"
+#include <memory>
 
 class DChartBase : public Fl_Widget
 {
@@ -31,6 +34,7 @@ class DChartBase : public Fl_Widget
 
         Series *series;
         void addSeries(Series *s);
+        std::unique_ptr <BasicAxis> defaultHorizAxis;
 
 
         virtual int handle(int event) override;

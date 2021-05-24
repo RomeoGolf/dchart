@@ -11,12 +11,14 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     //ctor
 
     chartHelper.marginTop = 40;
-    chartHelper.marginBottom = 10;
-    chartHelper.marginLeft = 20;
+    chartHelper.marginBottom = 50;
+    chartHelper.marginLeft = 70;
     chartHelper.marginRight = 20;
 
     needWidgetBorder = true;
     needChartBorder = true;
+
+    defaultHorizAxis = std::make_unique<HorizAxis>(this->chartHelper);
 }
 
 DChartBase::~DChartBase()
@@ -37,6 +39,9 @@ void DChartBase::draw()
         drawWidgetBorder();
         drawChartBorder();
         draw_label();
+
+        defaultHorizAxis->draw();
+
         if(isZoom)
             drawZoomRect();
         series->draw();
