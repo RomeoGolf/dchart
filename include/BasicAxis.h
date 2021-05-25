@@ -30,10 +30,6 @@ class BasicAxis
     procedure IfMouseShift(); virtual; abstract;
     procedure IfMouseZoom(); virtual; abstract;
     procedure UnZoom();
-    property MouseXStart : integer read FMouseXStart write SetMouseXStart;
-    property MouseXNow : integer read FMouseXNow write SetMouseXNow;
-    property MouseYStart : integer read FMouseYStart write SetMouseYStart;
-    property MouseYNow : integer read FMouseYNow write SetMouseYNow;
         */
         double maximum;
         double minimun;
@@ -53,12 +49,19 @@ class BasicAxis
         double startMarkUnit;
         double startlabelValue;
 
+        int mouseStartX;
+        int mouseStartY;
+        int mouseNowX;
+        int mouseNowY;
+
         virtual void draw() = 0;
+        virtual void zoomByMouse() = 0;
         void unZoom();
 
 
     protected:
         ChartHelper &chartHelper;
+
         void setSizeCoeff();
         void calcStartMarkUnit();
 

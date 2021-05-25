@@ -10,8 +10,8 @@
 HorizAxis::HorizAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
-    visibleMinimum = 3.8;
-    visibleMaximum = 10.2;
+    visibleMinimum = 3.75;
+    visibleMaximum = 4.5;
 }
 
 HorizAxis::~HorizAxis()
@@ -77,7 +77,7 @@ void HorizAxis::calcStep()
     std::cout << "axis draw | degree = " << degree << "\n";
     std::cout << "axis draw | multipl = " << multipl << "\n";
 
-    step = div(ceil(gap), 5).quot;
+    step = div(ceil(gap), 7).quot;
 
     std::cout << "axis draw | step = " << step << "\n";
 
@@ -86,10 +86,30 @@ void HorizAxis::calcStep()
         step = round(step / 5) * 5;
     } else {
         step = 0.5;
+        //step = pow(10, degree - 0);
+        step = pow(10, floor(log10(gap)) - 0);
+        //step = round(step * 10) / 10;
     }
 
-    std::cout << "axis draw | step = " << step << "\n";
+    std::cout << "axis draw | step (2) = " << step << "\n";
 
     //if ((step > 1) && (step < 10)) step = 5;
+}
+
+void HorizAxis::zoomByMouse()
+{
+    double oldCoeff;
+    double oldVisibleMax;
+    double oldVisibleMin;
+
+    if (sizeCoeff != 0) {
+        oldCoeff = sizeCoeff;
+        oldVisibleMax = oldVisibleMaximum;
+        oldVisibleMin = oldVisibleMinimum;
+        visibleMaximum = visibleMinimum + (mouseNowX - chartHelper.chartRectLeft) / oldCoeff;
+        visibleMinimum = visibleMinimum + (mouseStartX - chartHelper.chartRectLeft) / oldCoeff;
+    } else {
+        // exception?
+    }
 }
 

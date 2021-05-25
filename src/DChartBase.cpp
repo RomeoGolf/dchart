@@ -88,6 +88,9 @@ int DChartBase::handle(int event)
         mouseStartY = Fl::event_y() - y();
         mouseNowY = Fl::event_y() - y();
 
+        defaultHorizAxis->mouseStartX = mouseStartX;
+        defaultHorizAxis->mouseStartY = mouseStartY;
+
         switch (Fl::event_button())
         {
             case FL_LEFT_MOUSE :
@@ -103,6 +106,18 @@ int DChartBase::handle(int event)
         {
             case FL_LEFT_MOUSE :
                 isZoom = false;
+                if ((mouseStartX > mouseNowX) && (mouseStartY > mouseNowY)) {
+                    // unzoom
+                }
+                if ((mouseStartX < mouseNowX) && (mouseStartY < mouseNowY)) {
+                    // zoom
+                    if ((mouseNowX - mouseStartX < 25)
+                        && (mouseNowY - mouseStartY < 25)) break;
+                    defaultHorizAxis->mouseNowX = mouseNowX;
+                    defaultHorizAxis->mouseNowY = mouseNowY;
+                    defaultHorizAxis->zoomByMouse();
+                    chartHelper.isZoomed = true;
+                }
                 redraw();
                 break;
             case FL_RIGHT_MOUSE :
