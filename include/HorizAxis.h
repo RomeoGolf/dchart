@@ -12,6 +12,7 @@ class HorizAxis : public BasicAxis
 
         void draw() override;
         void zoomByMouse() override;
+        void shiftByMouse() override;
         void calcStep();
 
     protected:

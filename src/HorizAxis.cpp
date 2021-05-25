@@ -11,9 +11,9 @@ HorizAxis::HorizAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
     minimun = 3.75;
-    maximum = 4.5;
+    maximum = 40.5;
     visibleMinimum = 3.75;
-    visibleMaximum = 4.5;
+    visibleMaximum = 40.5;
 }
 
 HorizAxis::~HorizAxis()
@@ -111,8 +111,24 @@ void HorizAxis::zoomByMouse()
         visibleMaximum = visibleMinimum + (mouseNowX - chartHelper.chartRectLeft) / oldCoeff;
         visibleMinimum = visibleMinimum + (mouseStartX - chartHelper.chartRectLeft) / oldCoeff;
     } else {
+        axisShift = 0;
         // exception?
     }
 }
 
+void HorizAxis::shiftByMouse()
+{
+    double oldCoeff;
+    double oldVisibleMax;
+    double oldVisibleMin;
+
+    if (sizeCoeff != 0) {
+        axisShift = (mouseNowX - mouseStartX) / sizeCoeff;
+    } else {
+        axisShift = 0;
+        // exception?
+    }
+    visibleMaximum = round((oldVisibleMaximum - axisShift) * 10) / 10;
+    visibleMinimum = round((oldVisibleMinimum - axisShift) * 10) / 10;
+}
 

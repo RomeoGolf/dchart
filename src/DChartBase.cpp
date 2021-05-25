@@ -80,13 +80,13 @@ void DChartBase::drawZoomRect()
 
 int DChartBase::handle(int event)
 {
+    mouseNowX = Fl::event_x() - x();
+    mouseNowY = Fl::event_y() - y();
     switch (event)
     {
     case FL_PUSH :
         mouseStartX = Fl::event_x() - x();
-        mouseNowX = Fl::event_x() - x();
         mouseStartY = Fl::event_y() - y();
-        mouseNowY = Fl::event_y() - y();
 
         defaultHorizAxis->mouseStartX = mouseStartX;
         defaultHorizAxis->mouseStartY = mouseStartY;
@@ -97,6 +97,8 @@ int DChartBase::handle(int event)
                 isZoom = true;
                 break;
             case FL_RIGHT_MOUSE :
+                defaultHorizAxis->oldVisibleMaximum = defaultHorizAxis->visibleMaximum;
+                defaultHorizAxis->oldVisibleMinimum = defaultHorizAxis->visibleMinimum;
                 isRightMouseButtonDown = true;
                 break;
         }
@@ -127,13 +129,17 @@ int DChartBase::handle(int event)
         return 1;
     case FL_DRAG :
         if (isZoom) {
-            zoomX = Fl::event_x() - x();
-            zoomY = Fl::event_y() - y();
+            zoomX = mouseNowX;
+            zoomY = mouseNowY;
             redraw();
-            mouseNowX = zoomX;
-            mouseNowY = zoomY;
-            return 1;
         }
+        if (isRightMouseButtonDown) {
+            defaultHorizAxis->mouseNowX = mouseNowX;
+            defaultHorizAxis->mouseNowY = mouseNowY;
+            defaultHorizAxis->shiftByMouse();
+            redraw();
+        }
+        return 1;
     default :
         return Fl_Widget::handle(event);
     }

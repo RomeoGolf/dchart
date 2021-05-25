@@ -21,15 +21,6 @@ class BasicAxis
 
     procedure CalcStartMarkUnit();
     procedure GetStartLabelValue();
-
-    // для обработки сдвига и зума мышью
-    property AxisShift : real read FAxisShift write SetAxisShift;
-    procedure FixStartXY(X, Y : integer); virtual;
-    procedure FixNowXY(X, Y : integer); virtual;
-    procedure FixMaxMin(); virtual;
-    procedure IfMouseShift(); virtual; abstract;
-    procedure IfMouseZoom(); virtual; abstract;
-    procedure UnZoom();
         */
         double maximum;
         double minimun;
@@ -48,6 +39,7 @@ class BasicAxis
         int pixelSize;
         double startMarkUnit;
         double startlabelValue;
+        double axisShift;
 
         int mouseStartX;
         int mouseStartY;
@@ -56,6 +48,7 @@ class BasicAxis
 
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
+        virtual void shiftByMouse() = 0;
         void unZoom();
 
 
