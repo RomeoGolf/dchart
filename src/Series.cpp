@@ -4,6 +4,8 @@
 #include <FL/fl_draw.H>
 #include <math.h>
 
+#include <iostream>
+
 Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
@@ -25,7 +27,12 @@ void Series::draw()
     fl_line_style(0);
 
     fl_begin_line();
-    for (int i = 0; i < data.size(); i++) {
+
+    int xStart = getFloorIndexOfX(horizAxis->visibleMinimum);
+    int xEnd = getFloorIndexOfX(horizAxis->visibleMaximum);
+    if (xEnd + 1 < data.size()) xEnd++;
+
+    for (int i = xStart; i <= xEnd; i++) {
         double x = data[i].xValue - horizAxis->visibleMinimum;
         double y = data[i].yValue;
 
@@ -38,4 +45,26 @@ void Series::draw()
     fl_end_line();
 }
 
+int Series::getFloorIndexOfX(double x)
+{
+    if (x >= data.back().xValue)
+        return data.size() - 1;
+    if (x <= data.front().xValue)
+        return 0;
+
+    int xStart = 0;
+    int xEnd = data.size() - 1;
+
+    while ((xEnd - xStart) > 1) {
+        int i = xStart + (xEnd - xStart) / 2;
+        auto &item = data[i];
+        if (item.xValue > x) {
+            xEnd = i;
+        } else {
+            xStart = i;
+        }
+    }
+
+    return xStart;
+}
 

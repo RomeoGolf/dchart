@@ -3,7 +3,7 @@
 #include <math.h>
 #include <Fl/fl_draw.h>
 
-#include <iostream>
+//#include <iostream>
 #include <string>
 #include <sstream>
 
@@ -30,12 +30,7 @@ void HorizAxis::draw()
     calcStep();
     calcStartMarkUnit();
 
-    std::cout << "axis draw | startMarkUnit = " << startMarkUnit << "\n";
-    std::cout << "axis draw | startMarkUnit = " << startMarkUnit << "\n";
-
     startlabelValue = round((visibleMinimum + startMarkUnit) * 10) / 10;
-
-    std::cout << "axis draw | startlabelValue = " << startlabelValue << "\n";
 
     double xlabelValue = startlabelValue;
     std::stringstream ss;
@@ -57,8 +52,6 @@ void HorizAxis::draw()
         nextX += step;
         x = chartHelper.chartRectLeft + ceil(nextX * sizeCoeff);
     }
-
-
 }
 
 void HorizAxis::calcStep()
@@ -75,13 +68,7 @@ void HorizAxis::calcStep()
     }
     int multipl = ceil(pow(10, degree));
 
-    std::cout << "axis draw | gap = " << gap << "\n";
-    std::cout << "axis draw | degree = " << degree << "\n";
-    std::cout << "axis draw | multipl = " << multipl << "\n";
-
     step = div(ceil(gap), 7).quot;
-
-    std::cout << "axis draw | step = " << step << "\n";
 
     if (step > 1) {
         step = (div(ceil(step), multipl).quot + 1) * multipl;
@@ -92,8 +79,6 @@ void HorizAxis::calcStep()
         step = pow(10, floor(log10(gap)) - 0);
         //step = round(step * 10) / 10;
     }
-
-    std::cout << "axis draw | step (2) = " << step << "\n";
 
     //if ((step > 1) && (step < 10)) step = 5;
 }
