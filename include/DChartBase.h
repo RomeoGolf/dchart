@@ -31,6 +31,7 @@ class DChartBase : public Fl_Widget
         bool needChartBorder;
         void drawWidgetBorder();
         void drawChartBorder();
+        void unZoom();
 
         Series *series;
         void addSeries(Series *s);

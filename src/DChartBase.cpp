@@ -107,7 +107,7 @@ int DChartBase::handle(int event)
             case FL_LEFT_MOUSE :
                 isZoom = false;
                 if ((mouseStartX > mouseNowX) && (mouseStartY > mouseNowY)) {
-                    // unzoom
+                    unZoom();
                 }
                 if ((mouseStartX < mouseNowX) && (mouseStartY < mouseNowY)) {
                     // zoom
@@ -165,5 +165,9 @@ void DChartBase::addSeries(Series* s)
     series = s;
 }
 
+void DChartBase::unZoom()
+{
+    defaultHorizAxis->unZoom();
+}
 
 
