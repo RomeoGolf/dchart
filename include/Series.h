@@ -2,8 +2,10 @@
 #define SERIES_H
 
 #include <vector>
+#include <memory>
 
 #include "ChartHelper.h"
+#include "BasicAxis.h"
 
 template<typename T> struct SeriesData
 {
@@ -19,6 +21,7 @@ class Series
         virtual ~Series();
 
         std::vector<SeriesData<double>> data;
+        std::shared_ptr <BasicAxis> horizAxis;
 
         void addXY(double x, double y);
         void draw();

@@ -26,10 +26,10 @@ void Series::draw()
 
     fl_begin_line();
     for (int i = 0; i < data.size(); i++) {
-        double x = data[i].xValue;
+        double x = data[i].xValue - horizAxis->visibleMinimum;
         double y = data[i].yValue;
 
-        int cx = ceil(x * (chartHelper.chartRectRight - chartHelper.chartRectLeft) / 10) + chartHelper.marginLeft;
+        int cx = ceil(x * horizAxis->sizeCoeff) + chartHelper.marginLeft;
         int cy = chartHelper.chartRectBottom - ceil(y * (chartHelper.chartRectBottom - chartHelper.chartRectTop) / 100);
 
         fl_vertex(cx, cy);

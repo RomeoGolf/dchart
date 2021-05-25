@@ -35,7 +35,7 @@ class DChartBase : public Fl_Widget
 
         Series *series;
         void addSeries(Series *s);
-        std::unique_ptr <BasicAxis> defaultHorizAxis;
+        std::shared_ptr <BasicAxis> defaultHorizAxis;
 
 
         virtual int handle(int event) override;

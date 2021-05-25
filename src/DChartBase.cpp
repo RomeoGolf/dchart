@@ -18,7 +18,7 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     needWidgetBorder = true;
     needChartBorder = true;
 
-    defaultHorizAxis = std::make_unique<HorizAxis>(this->chartHelper);
+    defaultHorizAxis = std::make_shared<HorizAxis>(this->chartHelper);
 }
 
 DChartBase::~DChartBase()
@@ -169,6 +169,7 @@ void DChartBase::drawChartBorder()
 void DChartBase::addSeries(Series* s)
 {
     series = s;
+    s->horizAxis = defaultHorizAxis;
 }
 
 void DChartBase::unZoom()
