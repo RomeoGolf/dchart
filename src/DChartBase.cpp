@@ -131,7 +131,10 @@ int DChartBase::handle(int event)
                 if ((mouseStartX < mouseNowX) && (mouseStartY < mouseNowY)) {
                     // zoom
                     if ((mouseNowX - mouseStartX < 25)
-                        && (mouseNowY - mouseStartY < 25)) break;
+                        && (mouseNowY - mouseStartY < 25)) {
+                        redraw();
+                        break;
+                    }
                     defaultHorizAxis->mouseNowX = mouseNowX;
                     defaultHorizAxis->mouseNowY = mouseNowY;
                     defaultHorizAxis->zoomByMouse();
