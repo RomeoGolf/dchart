@@ -2,8 +2,8 @@
 
 #include <FL/Fl.H>
 #include <FL/fl_draw.H>
-#include <math.h>
 
+#include <math.h>
 #include <iostream>
 
 Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
@@ -34,10 +34,10 @@ void Series::draw()
 
     for (int i = xStart; i <= xEnd; i++) {
         double x = data[i].xValue - horizAxis->visibleMinimum;
-        double y = data[i].yValue;
+        double y = data[i].yValue - vertAxis->visibleMinimum;
 
         int cx = ceil(x * horizAxis->sizeCoeff) + chartHelper.marginLeft;
-        int cy = chartHelper.chartRectBottom - ceil(y * (chartHelper.chartRectBottom - chartHelper.chartRectTop) / 100);
+        int cy = ceil(chartHelper.chartRectBottom - y * vertAxis->sizeCoeff);
 
         fl_vertex(cx, cy);
     }

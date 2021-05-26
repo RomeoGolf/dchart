@@ -5,6 +5,7 @@
 #include <Series.h>
 #include <BasicAxis.h>
 #include <HorizAxis.h>
+#include <VertAxis.h>
 
 #include "ChartHelper.h"
 #include <memory>
@@ -36,7 +37,7 @@ class DChartBase : public Fl_Widget
         Series *series;
         void addSeries(Series *s);
         std::shared_ptr <BasicAxis> defaultHorizAxis;
-
+        std::shared_ptr <BasicAxis> defaultVertAxis;
 
         virtual int handle(int event) override;
 

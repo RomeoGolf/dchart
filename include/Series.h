@@ -22,6 +22,7 @@ class Series
 
         std::vector<SeriesData<double>> data;
         std::shared_ptr <BasicAxis> horizAxis;
+        std::shared_ptr <BasicAxis> vertAxis;
 
         void addXY(double x, double y);
         void draw();

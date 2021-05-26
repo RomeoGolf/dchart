@@ -19,6 +19,7 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     needChartBorder = true;
 
     defaultHorizAxis = std::make_shared<HorizAxis>(this->chartHelper);
+    defaultVertAxis = std::make_shared<VertAxis>(this->chartHelper);
 }
 
 DChartBase::~DChartBase()
@@ -41,6 +42,7 @@ void DChartBase::draw()
         draw_label();
 
         defaultHorizAxis->draw();
+        defaultVertAxis->draw();
 
         if(isZoom)
             drawZoomRect();
@@ -90,6 +92,8 @@ int DChartBase::handle(int event)
 
         defaultHorizAxis->mouseStartX = mouseStartX;
         defaultHorizAxis->mouseStartY = mouseStartY;
+        defaultVertAxis->mouseStartX = mouseStartX;
+        defaultVertAxis->mouseStartY = mouseStartY;
 
         switch (Fl::event_button())
         {
@@ -99,6 +103,8 @@ int DChartBase::handle(int event)
             case FL_RIGHT_MOUSE :
                 defaultHorizAxis->oldVisibleMaximum = defaultHorizAxis->visibleMaximum;
                 defaultHorizAxis->oldVisibleMinimum = defaultHorizAxis->visibleMinimum;
+                defaultVertAxis->oldVisibleMaximum = defaultVertAxis->visibleMaximum;
+                defaultVertAxis->oldVisibleMinimum = defaultVertAxis->visibleMinimum;
                 isRightMouseButtonDown = true;
                 break;
         }
@@ -118,6 +124,11 @@ int DChartBase::handle(int event)
                     defaultHorizAxis->mouseNowX = mouseNowX;
                     defaultHorizAxis->mouseNowY = mouseNowY;
                     defaultHorizAxis->zoomByMouse();
+
+                    defaultVertAxis->mouseNowX = mouseNowX;
+                    defaultVertAxis->mouseNowY = mouseNowY;
+                    defaultVertAxis->zoomByMouse();
+
                     chartHelper.isZoomed = true;
                 }
                 redraw();
@@ -137,6 +148,10 @@ int DChartBase::handle(int event)
             defaultHorizAxis->mouseNowX = mouseNowX;
             defaultHorizAxis->mouseNowY = mouseNowY;
             defaultHorizAxis->shiftByMouse();
+
+            defaultVertAxis->mouseNowX = mouseNowX;
+            defaultVertAxis->mouseNowY = mouseNowY;
+            defaultVertAxis->shiftByMouse();
             redraw();
         }
         return 1;
@@ -170,11 +185,13 @@ void DChartBase::addSeries(Series* s)
 {
     series = s;
     s->horizAxis = defaultHorizAxis;
+    s->vertAxis = defaultVertAxis;
 }
 
 void DChartBase::unZoom()
 {
     defaultHorizAxis->unZoom();
+    defaultVertAxis->unZoom();
 }
 
 
