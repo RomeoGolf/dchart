@@ -18,9 +18,9 @@ struct Notch {
 VertAxis::VertAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
-    minimun = -10;
+    minimun = -10.7;
     maximum = 110.5;
-    visibleMinimum = -10;
+    visibleMinimum = -10.7;
     visibleMaximum = 110.5;
 }
 
@@ -51,11 +51,11 @@ void VertAxis::calcStep()
     }
     int multipl = ceil(pow(10, degree));
 
-    step = div(ceil(gap), 7).quot;
+    step = div(ceil(gap), 10).quot;
 
     if (step > 1) {
         step = (div(ceil(step), multipl).quot + 1) * multipl;
-        step = round(step / 5) * 5;
+        //step = round(step / 5) * 5;
     } else {
         //step = 0.5;
         step = pow(10, floor(log10(gap)) - 0);

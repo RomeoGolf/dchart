@@ -26,6 +26,9 @@ void HorizAxis::draw()
     pixelSize = (chartHelper.chartRectRight - chartHelper.chartRectLeft);
     if (pixelSize < 5) return;
 
+    visibleMinimum = round(visibleMinimum * 10) / 10;
+    visibleMaximum = round(visibleMaximum * 10) / 10;
+
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
@@ -39,7 +42,7 @@ void HorizAxis::draw()
 
     double nextX = startMarkUnit;
 
-    double x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
+    int x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
     while (x <= chartHelper.chartRectRight) {
         int labelWidth = fl_width(xLabelString.data());
 
@@ -76,7 +79,7 @@ void HorizAxis::calcStep()
 
     if (step > 1) {
         step = (div(ceil(step), multipl).quot + 1) * multipl;
-        step = round(step / 5) * 5;
+        //step = round(step / 5) * 5;
     } else {
         step = 0.5;
         //step = pow(10, degree - 0);
@@ -84,7 +87,7 @@ void HorizAxis::calcStep()
         //step = round(step * 10) / 10;
     }
 
-    //if ((step > 1) && (step < 10)) step = 5;
+    if ((step > 1) && (step < 10)) step = 5;
 }
 
 void HorizAxis::zoomByMouse()
@@ -107,10 +110,6 @@ void HorizAxis::zoomByMouse()
 
 void HorizAxis::shiftByMouse()
 {
-    double oldCoeff;
-    double oldVisibleMax;
-    double oldVisibleMin;
-
     if (sizeCoeff != 0) {
         axisShift = (mouseNowX - mouseStartX) / sizeCoeff;
     } else {
