@@ -78,7 +78,15 @@ void DChartBase::drawZoomRect()
 {
     fl_color(FL_BLACK);
     fl_line_style(FL_DASH, 1, 0);
-    fl_rect(mouseStartX, mouseStartY, zoomX - mouseStartX, zoomY - mouseStartY);
+    if ((zoomX >= mouseStartX) && (zoomY >= mouseStartY))
+    {
+        fl_rect(mouseStartX, mouseStartY, zoomX - mouseStartX, zoomY - mouseStartY);
+    }
+    if ((zoomX < mouseStartX) && (zoomY < mouseStartY))
+    {
+        fl_rect(zoomX, zoomY, mouseStartX - zoomX, mouseStartY - zoomY);
+    }
+
     fl_line_style(0);
 
 }
@@ -142,9 +150,9 @@ int DChartBase::handle(int event)
         }
         return 1;
     case FL_DRAG :
+        zoomX = mouseNowX;
+        zoomY = mouseNowY;
         if (isZoom) {
-            zoomX = mouseNowX;
-            zoomY = mouseNowY;
             redraw();
         }
         if (isRightMouseButtonDown) {
