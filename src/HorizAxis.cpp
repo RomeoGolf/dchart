@@ -42,12 +42,16 @@ void HorizAxis::draw()
     double x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
     while (x <= chartHelper.chartRectRight) {
         int labelWidth = fl_width(xLabelString.data());
+
+        fl_color(FL_BLACK);
         fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
         xlabelValue = round((xlabelValue + step) * 10) / 10;
         std::stringstream ss;
         ss << xlabelValue;
         xLabelString = ss.str();
 
+        fl_color(FL_BLUE);
+        fl_line_style(FL_DOT, 1);
         fl_line(x, chartHelper.chartRectTop, x, chartHelper.chartRectBottom);
         nextX += step;
         x = chartHelper.chartRectLeft + ceil(nextX * sizeCoeff);

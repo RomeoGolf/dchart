@@ -37,6 +37,7 @@ void DChartBase::draw()
     Fl_Offscreen oscr = fl_create_offscreen(w(), h());
     {
         fl_begin_offscreen(oscr);
+
         drawWidgetBorder();
         drawChartBorder();
         draw_label();
@@ -44,8 +45,10 @@ void DChartBase::draw()
         defaultHorizAxis->draw();
         defaultVertAxis->draw();
 
-        if(isZoom)
+        if(isZoom) {
             drawZoomRect();
+        }
+
         series->draw();
         fl_end_offscreen();
 

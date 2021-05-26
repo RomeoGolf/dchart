@@ -23,7 +23,7 @@ void Series::addXY(double x, double y)
 
 void Series::draw()
 {
-    fl_color(FL_BLUE);
+    fl_color(FL_RED);
     fl_line_style(0);
 
     fl_begin_line();
