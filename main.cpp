@@ -5,6 +5,8 @@
 #include <DChartBase.h>
 #include <Series.h>
 
+#include <math.h>
+
 int main (int argc, char ** argv)
 {
   Fl_Window *window;
@@ -21,15 +23,21 @@ int main (int argc, char ** argv)
   window->end ();
   window->show (argc, argv);
 
-  Series *s1 = new Series(dcb->chartHelper);
-  s1->addXY(0,0);
-  s1->addXY(1,10);
-  s1->addXY(2,70);
-  s1->addXY(3,30);
-  s1->addXY(4,50);
-  s1->addXY(5,20);
-  s1->addXY(10,100);
-  dcb->addSeries(s1);
+  dcb->addSeries();
+  dcb->series.back()->addXY(0,0);
+  dcb->series.back()->addXY(1,10);
+  dcb->series.back()->addXY(2,70);
+  dcb->series.back()->addXY(3,30);
+  dcb->series.back()->addXY(4,50);
+  dcb->series.back()->addXY(5,20);
+  dcb->series.back()->addXY(10,100);
+
+
+  dcb->addSeries();
+  for (double t = 0; t < 15; t += 0.05) {
+      double val = sin(t) * 10.0;
+      dcb->series.back()->addXY(t, val);
+  }
 
   return(Fl::run());
 }

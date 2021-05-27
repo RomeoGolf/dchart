@@ -34,8 +34,10 @@ class DChartBase : public Fl_Widget
         void drawChartBorder();
         void unZoom();
 
-        Series *series;
-        void addSeries(Series *s);
+        std::vector<std::unique_ptr<Series>> series;
+        //Series *series;
+        //void addSeries(Series *s);
+        void addSeries();
         std::shared_ptr <BasicAxis> defaultHorizAxis;
         std::shared_ptr <BasicAxis> defaultVertAxis;
 

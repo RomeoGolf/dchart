@@ -49,7 +49,12 @@ void DChartBase::draw()
             drawZoomRect();
         }
 
-        series->draw();
+        std::vector<std::unique_ptr<Series>>::const_iterator item;
+        for (item = series.begin(); item != series.end(); ++item) {
+            (*item)->draw();
+        }
+
+
         fl_end_offscreen();
 
         fl_copy_offscreen(x(), y(), w(), h(), oscr, 0, 0);
@@ -195,11 +200,18 @@ void DChartBase::drawChartBorder()
 
 }
 
-void DChartBase::addSeries(Series* s)
+/*void DChartBase::addSeries(Series* s)
 {
     series = s;
     s->horizAxis = defaultHorizAxis;
     s->vertAxis = defaultVertAxis;
+}*/
+
+void DChartBase::addSeries()
+{
+    series.push_back(std::make_unique<Series>(chartHelper));
+    series.back()->horizAxis = defaultHorizAxis;
+    series.back()->vertAxis = defaultVertAxis;
 }
 
 void DChartBase::unZoom()
