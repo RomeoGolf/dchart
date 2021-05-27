@@ -26,14 +26,14 @@ void HorizAxis::draw()
     pixelSize = (chartHelper.chartRectRight - chartHelper.chartRectLeft);
     if (pixelSize < 5) return;
 
-    visibleMinimum = round(visibleMinimum * 10) / 10;
-    visibleMaximum = round(visibleMaximum * 10) / 10;
+    visibleMinimum = /*round*/(visibleMinimum * 1) / 1;
+    visibleMaximum = /*round*/(visibleMaximum * 1) / 1;
 
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
 
-    startlabelValue = round((visibleMinimum + startMarkUnit) * 10) / 10;
+    startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 1) / 1;
 
     double xlabelValue = startlabelValue;
     std::stringstream ss;
@@ -48,7 +48,7 @@ void HorizAxis::draw()
 
         fl_color(FL_BLACK);
         fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
-        xlabelValue = round((xlabelValue + step) * 10) / 10;
+        xlabelValue = /*round*/((xlabelValue + step) * 1) / 1;
         std::stringstream ss;
         ss << xlabelValue;
         xLabelString = ss.str();
@@ -116,7 +116,7 @@ void HorizAxis::shiftByMouse()
         axisShift = 0;
         // exception?
     }
-    visibleMaximum = round((oldVisibleMaximum - axisShift) * 10) / 10;
-    visibleMinimum = round((oldVisibleMinimum - axisShift) * 10) / 10;
+    visibleMaximum = /*round*/((oldVisibleMaximum - axisShift) * 1) / 1;
+    visibleMinimum = /*round*/((oldVisibleMinimum - axisShift) * 1) / 1;
 }
 

@@ -36,7 +36,7 @@ void BasicAxis::calcStartMarkUnit()
 {
     if (fabs(step) > 2.2250738585072014e-308) {
         startMarkUnit = step - modf(visibleMinimum / step, nullptr) * step;
-        startMarkUnit = round((modf(startMarkUnit / step, nullptr) * step) * 10) / 10.0;
+        startMarkUnit = /*round*/((modf(startMarkUnit / step, nullptr) * step) * 1) / 1;
     } else {
         startMarkUnit = 0;
     }

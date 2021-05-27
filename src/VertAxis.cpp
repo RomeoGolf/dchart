@@ -72,7 +72,7 @@ void VertAxis::draw()
     calcStep();
     calcStartMarkUnit();
 
-    startlabelValue = round((visibleMinimum + startMarkUnit) * 10) / 10;
+    startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 10) / 10;
 
     double yLabelValue = startlabelValue;
     //std::stringstream ss;
@@ -97,7 +97,7 @@ void VertAxis::draw()
         n.h = y - (labelHeight - fl_descent()) / 2;
         n.y = y;
         notches.push_back(n);
-        yLabelValue = round((yLabelValue + step) * 10) / 10;
+        yLabelValue = /*round*/((yLabelValue + step) * 10) / 10;
         nextY = nextY + step;
         y = ceil(nextY * sizeCoeff);
     }
@@ -145,6 +145,6 @@ void VertAxis::shiftByMouse()
         axisShift = 0;
         // exception?
     }
-    visibleMaximum = round((oldVisibleMaximum + axisShift) * 10) / 10;
-    visibleMinimum = round((oldVisibleMinimum + axisShift) * 10) / 10;
+    visibleMaximum = /*round*/((oldVisibleMaximum + axisShift) * 10) / 10;
+    visibleMinimum = /*round*/((oldVisibleMinimum + axisShift) * 10) / 10;
 }
