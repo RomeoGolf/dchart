@@ -75,10 +75,6 @@ void VertAxis::draw()
     startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 10) / 10;
 
     double yLabelValue = startlabelValue;
-    //std::stringstream ss;
-    //ss << yLabelValue;
-    //std::string yLabelString = ss.str();
-
     double nextY = startMarkUnit;
     int y = ceil(startMarkUnit * sizeCoeff);
 
@@ -89,7 +85,7 @@ void VertAxis::draw()
     while (y <= (b_bottom - b_top)) {
         Notch n;
         std::stringstream ss;
-        ss << yLabelValue;
+        ss << round(yLabelValue * 1000) / 1000;
         n.label = ss.str();
         int labelHeight = fl_height();
         int labelWidth = fl_width(n.label.c_str());
