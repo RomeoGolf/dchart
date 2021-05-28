@@ -26,6 +26,8 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
 
     defaultHorizAxis->setAutoSize(true);
     defaultVertAxis->setAutoSize(true);
+    defaultHorizAxis->setAutoZoom(true);
+    defaultVertAxis->setAutoZoom(true);
 }
 
 DChartBase::~DChartBase()

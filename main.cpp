@@ -48,7 +48,7 @@ int main (int argc, char ** argv)
       dcb->series.back()->addXY(t, val);
   }
 
-  dcb->unZoom();
+  //dcb->unZoom();
 
   return(Fl::run());
 }

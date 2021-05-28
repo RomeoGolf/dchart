@@ -38,7 +38,10 @@ class BasicAxis
 
         void setAutoSize(bool value);
         bool getAutoSize();
+        void setAutoZoom(bool value);
+        bool getAutoZoom();
         void doAutoSize(double minVal, double maxVal);
+
 
         void incSeriesNum();
         void decSeriesNum();

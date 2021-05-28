@@ -66,6 +66,16 @@ bool BasicAxis::getAutoSize()
     return isAutoSize;
 }
 
+void BasicAxis::setAutoZoom(bool value)
+{
+    isAutoZoom = value;
+}
+
+bool BasicAxis::getAutoZoom()
+{
+    return isAutoZoom;
+}
+
 void BasicAxis::doAutoSize(double minVal, double maxVal)
 {
     if (!getAutoSize()) return;
@@ -76,6 +86,10 @@ void BasicAxis::doAutoSize(double minVal, double maxVal)
     } else {
         if (minVal < minimum) setMinimum(minVal);
         if (maxVal > maximum) setMaximum(maxVal);
+    }
+    if (getAutoZoom()) {
+        visibleMinimum = minimum;
+        visibleMaximum = maximum;
     }
 }
 
