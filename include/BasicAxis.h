@@ -22,29 +22,19 @@ class BasicAxis
     procedure CalcStartMarkUnit();
     procedure GetStartLabelValue();
         */
-        double maximum;
-        double minimun;
-        double visibleMaximum;
-        double visibleMinimum;
-        double oldVisibleMaximum;
-        double oldVisibleMinimum;
-        double step;
-        bool isAutoZoom;
-        bool isAutoSize;
-        bool isAutoStep;
-        bool isVisible;
-        double unitSize;
-        double visibleUnitSize;
-        double sizeCoeff;
-        int pixelSize;
-        double startMarkUnit;
-        double startlabelValue;
-        double axisShift;
 
         int mouseStartX;
         int mouseStartY;
         int mouseNowX;
         int mouseNowY;
+        double oldVisibleMaximum;
+        double oldVisibleMinimum;
+        double visibleMaximum;
+        double visibleMinimum;
+        double sizeCoeff;
+
+        void setVisible(bool value);
+        bool getVisible();
 
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
@@ -54,6 +44,21 @@ class BasicAxis
 
     protected:
         ChartHelper &chartHelper;
+
+        double maximum;
+        double minimun;
+
+        double step;
+        bool isAutoZoom;
+        bool isAutoSize;
+        bool isAutoStep;
+        bool isVisible;
+        double unitSize;
+        double visibleUnitSize;
+        int pixelSize;
+        double startMarkUnit;
+        double startlabelValue;
+        double axisShift;
 
         void setSizeCoeff();
         void calcStartMarkUnit();

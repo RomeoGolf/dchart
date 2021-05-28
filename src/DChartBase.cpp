@@ -20,6 +20,9 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
 
     defaultHorizAxis = std::make_shared<HorizAxis>(this->chartHelper);
     defaultVertAxis = std::make_shared<VertAxis>(this->chartHelper);
+
+    defaultHorizAxis->setVisible(true);
+    defaultVertAxis->setVisible(true);
 }
 
 DChartBase::~DChartBase()

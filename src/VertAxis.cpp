@@ -72,6 +72,8 @@ void VertAxis::draw()
     calcStep();
     calcStartMarkUnit();
 
+    if (!isVisible) return;
+
     startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 10) / 10;
 
     double yLabelValue = startlabelValue;
@@ -81,6 +83,7 @@ void VertAxis::draw()
     int b_bottom = chartHelper.chartRectBottom + 0;
     int b_top = chartHelper.chartRectTop;
     std::vector<Notch> notches;
+
 
     while (y <= (b_bottom - b_top)) {
         Notch n;

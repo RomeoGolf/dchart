@@ -33,6 +33,8 @@ void HorizAxis::draw()
     calcStep();
     calcStartMarkUnit();
 
+    if (!isVisible) return;
+
     startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 1) / 1;
 
     double xLabelValue = startlabelValue;

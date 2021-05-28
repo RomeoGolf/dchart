@@ -42,3 +42,13 @@ void BasicAxis::calcStartMarkUnit()
     }
 }
 
+void BasicAxis::setVisible(bool value)
+{
+    isVisible = value;
+}
+
+bool BasicAxis::getVisible()
+{
+    return isVisible;
+}
+
