@@ -26,11 +26,12 @@ int main (int argc, char ** argv)
   dcb->addSeries();
   dcb->series.back()->addXY(0,0);
   dcb->series.back()->addXY(1,10);
-  dcb->series.back()->addXY(2,70);
   dcb->series.back()->addXY(3,30);
+  dcb->series.back()->addXY(2,70);
   dcb->series.back()->addXY(4,50);
   dcb->series.back()->addXY(5,20);
   dcb->series.back()->addXY(10,100);
+  dcb->series.back()->sortByX();
 
 
   dcb->addSeries();

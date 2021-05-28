@@ -5,6 +5,7 @@
 
 #include <math.h>
 #include <iostream>
+#include <algorithm>
 
 Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
@@ -67,4 +68,14 @@ int Series::getFloorIndexOfX(double x)
 
     return xStart;
 }
+
+void Series::sortByX()
+{
+    std::sort(data.begin(), data.end( ), [ ]( const auto& lhs, const auto& rhs )
+    {
+       return lhs.xValue < rhs.xValue;
+    });
+}
+
+
 

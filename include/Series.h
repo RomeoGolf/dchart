@@ -27,6 +27,7 @@ class Series
         void addXY(double x, double y);
         void draw();
         int getFloorIndexOfX(double x);
+        void sortByX();
 
     protected:
 
