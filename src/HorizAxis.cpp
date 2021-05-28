@@ -35,19 +35,20 @@ void HorizAxis::draw()
 
     startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 1) / 1;
 
-    double xlabelValue = startlabelValue;
+    double xLabelValue = startlabelValue;
     double nextX = startMarkUnit;
 
     int x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
     while (x <= chartHelper.chartRectRight) {
         std::stringstream ss;
-        ss << round(xlabelValue * 100000) / 100000;
-        std::string xLabelString = ss.str();
+        double val = round(xLabelValue * 1000) / 1000;
+        val = (fabs(val) < std::numeric_limits<double>::epsilon() ? 0 : val);
+        ss << val;        std::string xLabelString = ss.str();
         int labelWidth = fl_width(xLabelString.data());
 
         fl_color(FL_BLACK);
         fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
-        xlabelValue = /*round*/((xlabelValue + step) * 1) / 1;
+        xLabelValue = /*round*/((xLabelValue + step) * 1) / 1;
 
         fl_color(FL_BLUE);
         fl_line_style(FL_DOT, 1);

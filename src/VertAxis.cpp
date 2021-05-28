@@ -85,7 +85,9 @@ void VertAxis::draw()
     while (y <= (b_bottom - b_top)) {
         Notch n;
         std::stringstream ss;
-        ss << round(yLabelValue * 1000) / 1000;
+        double val = round(yLabelValue * 1000) / 1000;
+        val = (fabs(val) < std::numeric_limits<double>::epsilon() ? 0 : val);
+        ss << val;
         n.label = ss.str();
         int labelHeight = fl_height();
         int labelWidth = fl_width(n.label.c_str());
