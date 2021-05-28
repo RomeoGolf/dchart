@@ -2,13 +2,17 @@
 
 #include <math.h>
 
+#include <iostream>
+
 BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
-    minimun = 0;
+    minimum = 0;
     maximum = 10;
-    visibleMinimum = minimun;
+    visibleMinimum = minimum;
     visibleMaximum = maximum;
+    seriesNum = 0;
+
 }
 
 BasicAxis::~BasicAxis()
@@ -19,7 +23,7 @@ BasicAxis::~BasicAxis()
 void BasicAxis::unZoom()
 {
     visibleMaximum = maximum;
-    visibleMinimum = minimun;
+    visibleMinimum = minimum;
 }
 
 void BasicAxis::setSizeCoeff()
@@ -51,4 +55,75 @@ bool BasicAxis::getVisible()
 {
     return isVisible;
 }
+
+void BasicAxis::setAutoSize(bool value)
+{
+    isAutoSize = value;
+}
+
+bool BasicAxis::getAutoSize()
+{
+    return isAutoSize;
+}
+
+void BasicAxis::doAutoSize(double minVal, double maxVal)
+{
+    if (!getAutoSize()) return;
+    if (seriesNum < 1) return;
+    if (seriesNum == 1) {
+        setMinimum(minVal);
+        setMaximum(maxVal);
+    } else {
+        if (minVal < minimum) setMinimum(minVal);
+        if (maxVal > maximum) setMaximum(maxVal);
+    }
+}
+
+
+void BasicAxis::setMinimum(double value)
+{
+    minimum = value;
+    if (maximum < minimum) {
+        maximum = minimum + std::numeric_limits<double>::epsilon();
+    }
+}
+
+double BasicAxis::getMinimum()
+{
+    return minimum;
+}
+
+void BasicAxis::setMaximum(double value)
+{
+    maximum = value;
+    if (minimum > maximum) {
+        minimum = maximum - std::numeric_limits<double>::epsilon();
+    }
+}
+
+double BasicAxis::getMaximum()
+{
+    return maximum;
+}
+
+
+void BasicAxis::incSeriesNum()
+{
+    seriesNum++;
+    //std::cout << " (++) series num = " << seriesNum << std::endl;
+}
+
+void BasicAxis::decSeriesNum()
+{
+    if (seriesNum > 0) seriesNum--;
+
+}
+
+
+int BasicAxis::getSeriesNum()
+{
+   return seriesNum;
+}
+
+
 

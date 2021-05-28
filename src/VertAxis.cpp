@@ -18,7 +18,7 @@ struct Notch {
 VertAxis::VertAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
-    minimun = -10.7;
+    minimum = -10.7;
     maximum = 110.5;
     visibleMinimum = -10.7;
     visibleMaximum = 110.5;

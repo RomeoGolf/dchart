@@ -10,6 +10,10 @@
 Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
+    minX = std::numeric_limits<double>::max();
+    minY = std::numeric_limits<double>::max();
+    maxX = -std::numeric_limits<double>::max();
+    maxY = -std::numeric_limits<double>::max();
 }
 
 Series::~Series()
@@ -20,6 +24,15 @@ Series::~Series()
 void Series::addXY(double x, double y)
 {
     data.push_back(SeriesData<double>(x, y));
+    isSorted = false;
+
+    minX = x < minX ? x : minX;
+    minY = y < minY ? y : minY;
+    maxX = x > maxX ? x : maxX;
+    maxY = y > maxY ? y : maxY;
+
+    horizAxis->doAutoSize(minX, maxX);
+    vertAxis->doAutoSize(minY, maxY);
 }
 
 void Series::draw()
@@ -75,7 +88,47 @@ void Series::sortByX()
     {
        return lhs.xValue < rhs.xValue;
     });
+    isSorted = true;
 }
 
+void Series::setHorizAxis(std::shared_ptr<BasicAxis> value)
+{
+    this->horizAxis = value;
+    horizAxis->incSeriesNum();
+}
 
+void Series::setVertAxis(std::shared_ptr<BasicAxis> value)
+{
+    this->vertAxis = value;
+    this->vertAxis->incSeriesNum();
+}
 
+std::shared_ptr<BasicAxis> Series::getHorizAxis()
+{
+    return horizAxis;
+}
+
+std::shared_ptr<BasicAxis> Series::getVertAxis()
+{
+    return vertAxis;
+}
+
+double Series::getMaxX()
+{
+    return maxX;
+}
+
+double Series::getMaxY()
+{
+    return maxY;
+}
+
+double Series::getMinX()
+{
+    return minX;
+}
+
+double Series::getMinY()
+{
+    return minY;
+}

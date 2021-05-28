@@ -23,6 +23,9 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
 
     defaultHorizAxis->setVisible(true);
     defaultVertAxis->setVisible(true);
+
+    defaultHorizAxis->setAutoSize(true);
+    defaultVertAxis->setAutoSize(true);
 }
 
 DChartBase::~DChartBase()
@@ -213,8 +216,8 @@ void DChartBase::drawChartBorder()
 void DChartBase::addSeries()
 {
     series.push_back(std::make_unique<Series>(chartHelper));
-    series.back()->horizAxis = defaultHorizAxis;
-    series.back()->vertAxis = defaultVertAxis;
+    series.back()->setHorizAxis(defaultHorizAxis);
+    series.back()->setVertAxis(defaultVertAxis);
 }
 
 void DChartBase::unZoom()
@@ -222,5 +225,4 @@ void DChartBase::unZoom()
     defaultHorizAxis->unZoom();
     defaultVertAxis->unZoom();
 }
-
 

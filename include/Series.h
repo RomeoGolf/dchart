@@ -21,15 +21,29 @@ class Series
         virtual ~Series();
 
         std::vector<SeriesData<double>> data;
-        std::shared_ptr <BasicAxis> horizAxis;
-        std::shared_ptr <BasicAxis> vertAxis;
+        void setHorizAxis(std::shared_ptr <BasicAxis> value);
+        void setVertAxis(std::shared_ptr <BasicAxis> value);
+
+        std::shared_ptr<BasicAxis> getHorizAxis();
+        std::shared_ptr<BasicAxis> getVertAxis();
 
         void addXY(double x, double y);
         void draw();
         int getFloorIndexOfX(double x);
         void sortByX();
+        double getMaxX();
+        double getMaxY();
+        double getMinX();
+        double getMinY();
 
     protected:
+        std::shared_ptr <BasicAxis> horizAxis;
+        std::shared_ptr <BasicAxis> vertAxis;
+        bool isSorted;
+        double maxX;
+        double minX;
+        double maxY;
+        double minY;
 
     private:
         ChartHelper &chartHelper;

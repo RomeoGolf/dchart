@@ -6,6 +6,7 @@
 #include <Series.h>
 
 #include <math.h>
+//#include <iostream>
 
 int main (int argc, char ** argv)
 {
@@ -33,12 +34,21 @@ int main (int argc, char ** argv)
   dcb->series.back()->addXY(10,100);
   dcb->series.back()->sortByX();
 
+  //std::cout << "max x = " << dcb->series.back()->getMaxX() << std::endl;
 
   dcb->addSeries();
   for (double t = 0; t < 15; t += 0.05) {
       double val = sin(t) * 10.0;
       dcb->series.back()->addXY(t, val);
   }
+
+  dcb->addSeries();
+  for (double t = 5; t < 25; t += 0.1) {
+      double val = cos(t - 5) * 5.0;
+      dcb->series.back()->addXY(t, val);
+  }
+
+  dcb->unZoom();
 
   return(Fl::run());
 }

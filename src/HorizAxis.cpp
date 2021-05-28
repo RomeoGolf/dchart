@@ -10,7 +10,7 @@
 HorizAxis::HorizAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor
-    minimun = -3.75;
+    minimum = -3.75;
     maximum = 20.5;
     visibleMinimum = -3.75;
     visibleMaximum = 20.5;

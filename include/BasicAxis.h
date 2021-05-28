@@ -36,17 +36,31 @@ class BasicAxis
         void setVisible(bool value);
         bool getVisible();
 
+        void setAutoSize(bool value);
+        bool getAutoSize();
+        void doAutoSize(double minVal, double maxVal);
+
+        void incSeriesNum();
+        void decSeriesNum();
+        int getSeriesNum();
+
+        void setMinimum(double value);
+        double getMinimum();
+        void setMaximum(double value);
+        double getMaximum();
+
+
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
         virtual void shiftByMouse() = 0;
         void unZoom();
 
-
     protected:
         ChartHelper &chartHelper;
 
         double maximum;
-        double minimun;
+        double minimum;
+
 
         double step;
         bool isAutoZoom;
@@ -64,6 +78,7 @@ class BasicAxis
         void calcStartMarkUnit();
 
     private:
+        int seriesNum;
 };
 
 #endif // BASICAXIS_H
