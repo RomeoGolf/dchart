@@ -44,6 +44,7 @@ int main (int argc, char ** argv)
       dcb->series.back()->addXY(t, val);
   }
   dcb->series.back()->color = FL_GREEN;
+  dcb->series.back()->caption = "sinus";
 
   dcb->addSeries();
   for (double t = 5; t < 25; t += 0.1) {
@@ -51,6 +52,7 @@ int main (int argc, char ** argv)
       dcb->series.back()->addXY(t, val);
   }
   dcb->series.back()->color = FL_BLUE;
+  dcb->series.back()->caption = "cosinus";
 
   //dcb->unZoom();
 
