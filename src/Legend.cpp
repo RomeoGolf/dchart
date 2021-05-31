@@ -16,6 +16,7 @@ Legend::Legend(ChartHelper &chartHelper) : chartHelper(chartHelper)
 
     sampleGap = 5;
     sampleLength = 10;
+    sampleWidth = 3;
     itemGap = 15;
     margin = 15;
 }
@@ -42,6 +43,7 @@ void Legend::draw()
             //std::cout << "[legend draw] caption: " << legendData[i][j].caption
             //    << " x: " << legendData[i][j].startX << std::endl;
             fl_color(legendData[i][j].color);
+            fl_line_style(FL_SOLID, sampleWidth);
             fl_line(startX, y + fl_descent() - fl_height() / 2,
                     startX + sampleLength, y + fl_descent() - fl_height() / 2);
             //fl_line(startX , y + fl_descent() - fl_height() / 2 + 5,

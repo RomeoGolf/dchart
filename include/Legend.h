@@ -40,6 +40,7 @@ class Legend
 
         int sampleGap;
         int sampleLength;
+        int sampleWidth;
         int itemGap;
         int margin;
 };
