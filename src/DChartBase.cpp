@@ -14,6 +14,7 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     chartHelper.marginBottom = 50;
     chartHelper.marginLeft = 70;
     chartHelper.marginRight = 20;
+    setChartRectSize(w, h);
 
     needWidgetBorder = true;
     needChartBorder = true;
@@ -37,10 +38,10 @@ DChartBase::~DChartBase()
 
 void DChartBase::draw()
 {
-    chartHelper.chartRectTop = chartHelper.marginTop;
-    chartHelper.chartRectBottom = h() - chartHelper.marginBottom;
-    chartHelper.chartRectLeft = chartHelper.marginLeft;
-    chartHelper.chartRectRight = w() - chartHelper.marginRight;
+    //chartHelper.chartRectTop = chartHelper.marginTop;
+    //chartHelper.chartRectBottom = h() - chartHelper.marginBottom;
+    //chartHelper.chartRectLeft = chartHelper.marginLeft;
+    //chartHelper.chartRectRight = w() - chartHelper.marginRight;
 
     Fl_Offscreen oscr = fl_create_offscreen(w(), h());
     {
@@ -228,4 +229,25 @@ void DChartBase::unZoom()
     defaultHorizAxis->unZoom();
     defaultVertAxis->unZoom();
 }
+
+void DChartBase::resize(int x, int y, int w, int h)
+{
+    std::cout << "[resize before] w " << this->w() << std::endl;
+    Fl_Widget::resize(x, y, w, h);
+    std::cout << "[resize after] w " << this->w() << std::endl;
+
+    setChartRectSize(w, h);
+
+
+
+}
+
+void DChartBase::setChartRectSize(int w, int h)
+{
+    chartHelper.chartRectTop = chartHelper.marginTop;
+    chartHelper.chartRectBottom = h - chartHelper.marginBottom;
+    chartHelper.chartRectLeft = chartHelper.marginLeft;
+    chartHelper.chartRectRight = w - chartHelper.marginRight;
+}
+
 

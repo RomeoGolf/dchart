@@ -44,6 +44,7 @@ class DChartBase : public Fl_Widget
         std::shared_ptr <BasicAxis> defaultVertAxis;
 
         virtual int handle(int event) override;
+        virtual void resize(int x, int y, int w, int h) override;
 
     protected:
         void draw();
@@ -52,6 +53,7 @@ class DChartBase : public Fl_Widget
     private:
         int zoomX;
         int zoomY;
+        void setChartRectSize(int w, int h);
 };
 
 #endif // DCHARTBASE_H
