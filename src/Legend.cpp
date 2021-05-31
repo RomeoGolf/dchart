@@ -2,14 +2,22 @@
 
 #include <Fl/fl_draw.h>
 
-Legend::Legend()
+#include <iostream>
+
+Legend::Legend(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
     top = 5;
     left = 100;
-    height = 20;
-    width = 300;
+    height = 40;
+    width = 500;
     isVisible = true;
+    fontSize = 16;
+
+    sampleGap = 5;
+    sampleLength = 10;
+    itemGap = 15;
+    margin = 15;
 }
 
 Legend::~Legend()
@@ -20,13 +28,66 @@ Legend::~Legend()
 void Legend::draw()
 {
     if (!isVisible) return;
+    if (legendData.empty()) return;
 
+    fl_font(2, fontSize);
     fl_draw_box(FL_ENGRAVED_BOX, left, top, width, height, FL_BACKGROUND_COLOR);
+
+    int y = top + margin + fl_height() - fl_descent();
+    for (int i = 0; i < legendData.size(); i++) {
+        for (int j = 0; j < legendData[i].size(); j++) {
+            int startX = left + margin + legendData[i][j].startX;
+            fl_color(FL_BLACK);
+            fl_draw(legendData[i][j].caption.c_str(), startX + sampleLength + sampleGap, y);
+            //std::cout << "[legend draw] caption: " << legendData[i][j].caption
+            //    << " x: " << legendData[i][j].startX << std::endl;
+            fl_color(legendData[i][j].color);
+            fl_line(startX, y + fl_descent() - fl_height() / 2,
+                    startX + sampleLength, y + fl_descent() - fl_height() / 2);
+            //fl_line(startX , y + fl_descent() - fl_height() / 2 + 5,
+            //        startX + sampleLength + sampleGap + itemGap + fl_width("Series_3"), y + fl_descent() - fl_height() / 2 + 5);
+
+        }
+        y += margin + fl_height() - fl_descent();
+    }
 }
 
-void Legend::calcSize()
+void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
 {
+    if (!isVisible) {
+        return;
+    }
+    legendData.clear();
+    legendData.push_back(std::vector<LegendData>());
 
+    fl_font(2, fontSize);
+
+    int width_limit = chartHelper.chartRectRight - chartHelper.chartRectLeft;
+    int max_width = 0;
+    int width = 0;
+    std::string caption;
+
+    for (int i = 0; i < series.size(); i++) {
+        if (!series[i]->caption.empty()) {
+            caption = series[i]->caption;
+        } else {
+            caption = "NoName";
+        }
+        int item_width = fl_width(caption.c_str()) + sampleGap + itemGap + sampleLength;
+
+        if (width + item_width > width_limit - (margin * 2) + 4)
+            if (!legendData.back().empty()) {
+            width = 0;
+            legendData.push_back(std::vector<LegendData>());
+            }
+        legendData.back().push_back(LegendData(width, series[i]->color, series[i]->caption));
+        width += item_width;
+        if (max_width < width) max_width = width;
+    }
+
+    this->width = max_width + margin * 2 - itemGap;
+    height = (fl_height() - fl_descent() + margin ) * legendData.size() + margin;
+    left = chartHelper.chartRectLeft + (width_limit - this->width) / 2;
 }
 
 

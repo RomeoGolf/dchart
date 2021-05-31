@@ -1,8 +1,11 @@
 #ifndef SERIES_H
 #define SERIES_H
 
+#include <Fl/Enumerations.h>
+
 #include <vector>
 #include <memory>
+#include <string>
 
 #include "ChartHelper.h"
 #include "BasicAxis.h"
@@ -35,6 +38,10 @@ class Series
         double getMaxY();
         double getMinX();
         double getMinY();
+        //void setColor(Fl_Color color);
+
+        std::string caption;
+        Fl_Color color;
 
     protected:
         std::shared_ptr <BasicAxis> horizAxis;

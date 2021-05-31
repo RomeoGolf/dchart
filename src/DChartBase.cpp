@@ -6,15 +6,13 @@
 #include <iostream>
 
 DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
-    Fl_Widget(x,y,w,h,label)
+    Fl_Widget(x,y,w,h,label), legend(chartHelper)
 {
     //ctor
-
     chartHelper.marginTop = 40;
     chartHelper.marginBottom = 50;
     chartHelper.marginLeft = 70;
     chartHelper.marginRight = 20;
-    setChartRectSize(w, h);
 
     needWidgetBorder = true;
     needChartBorder = true;
@@ -222,6 +220,10 @@ void DChartBase::addSeries()
     series.push_back(std::make_unique<Series>(chartHelper));
     series.back()->setHorizAxis(defaultHorizAxis);
     series.back()->setVertAxis(defaultVertAxis);
+    series.back()->caption = "Series_" + std::to_string(series.size());
+
+    setChartRectSize(w(), h());
+    legend.calcSize(series);
 }
 
 void DChartBase::unZoom()
@@ -232,14 +234,12 @@ void DChartBase::unZoom()
 
 void DChartBase::resize(int x, int y, int w, int h)
 {
-    std::cout << "[resize before] w " << this->w() << std::endl;
+    //std::cout << "[resize before] w " << this->w() << std::endl;
     Fl_Widget::resize(x, y, w, h);
-    std::cout << "[resize after] w " << this->w() << std::endl;
+    //std::cout << "[resize after] w " << this->w() << std::endl;
 
     setChartRectSize(w, h);
-
-
-
+    legend.calcSize(series);
 }
 
 void DChartBase::setChartRectSize(int w, int h)

@@ -1,6 +1,7 @@
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Box.H>
+#include <Fl/Enumerations.h>
 
 #include <DChartBase.h>
 #include <Series.h>
@@ -33,6 +34,7 @@ int main (int argc, char ** argv)
   dcb->series.back()->addXY(5,20);
   dcb->series.back()->addXY(10,100);
   dcb->series.back()->sortByX();
+  dcb->series.back()->color = FL_RED;
 
   //std::cout << "max x = " << dcb->series.back()->getMaxX() << std::endl;
 
@@ -41,12 +43,14 @@ int main (int argc, char ** argv)
       double val = sin(t) * 10.0;
       dcb->series.back()->addXY(t, val);
   }
+  dcb->series.back()->color = FL_GREEN;
 
   dcb->addSeries();
   for (double t = 5; t < 25; t += 0.1) {
       double val = cos(t - 5) * 5.0;
       dcb->series.back()->addXY(t, val);
   }
+  dcb->series.back()->color = FL_BLUE;
 
   //dcb->unZoom();
 
