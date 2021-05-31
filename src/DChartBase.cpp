@@ -62,6 +62,7 @@ void DChartBase::draw()
             (*item)->draw();
         }
 
+        legend.draw();
 
         fl_end_offscreen();
 

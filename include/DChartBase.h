@@ -6,6 +6,7 @@
 #include <BasicAxis.h>
 #include <HorizAxis.h>
 #include <VertAxis.h>
+#include <Legend.h>
 
 #include "ChartHelper.h"
 #include <memory>
@@ -17,6 +18,7 @@ class DChartBase : public Fl_Widget
         virtual ~DChartBase();
 
         ChartHelper chartHelper;
+        Legend legend;
 
         void test();
         void drawZoomRect();
