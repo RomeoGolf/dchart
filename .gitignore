@@ -8,3 +8,5 @@
 # generated directories
 bin/
 obj/
+
+*.todo
