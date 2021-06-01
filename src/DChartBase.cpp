@@ -9,10 +9,11 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     Fl_Widget(x,y,w,h,label), legend(chartHelper)
 {
     //ctor
-    chartHelper.marginTop = 40;
+    chartHelper.marginTop = 10;
     chartHelper.marginBottom = 50;
     chartHelper.marginLeft = 70;
     chartHelper.marginRight = 20;
+    chartHelper.isAutoMarginTop = true;
 
     needWidgetBorder = true;
     needChartBorder = true;
@@ -199,10 +200,14 @@ void DChartBase::drawChartBorder()
 {
     if (needChartBorder) {
         fl_draw_box(FL_EMBOSSED_BOX,
-                    /*x() +*/ chartHelper.marginLeft,
-                    /*y() +*/ chartHelper.marginTop,
+                    /*x() + chartHelper.marginLeft,
+                    y() + chartHelper.marginTop,
                     w() - chartHelper.marginRight - chartHelper.marginLeft,
-                    h() - chartHelper.marginBottom - chartHelper.marginTop,
+                    h() - chartHelper.marginBottom - chartHelper.marginTop,*/
+                    chartHelper.chartRectLeft,
+                    chartHelper.chartRectTop,
+                    chartHelper.chartRectRight - chartHelper.chartRectLeft,
+                    chartHelper.chartRectBottom - chartHelper.chartRectTop,
                  FL_BACKGROUND_COLOR);
     }
 

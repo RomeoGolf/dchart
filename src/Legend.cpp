@@ -90,6 +90,10 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
     width = maxWidth + margin * 2 - itemGap;
     height = (fl_height() - fl_descent() + margin ) * legendData.size() + margin;
     left = chartHelper.chartRectLeft + (widthLimit - width) / 2;
+    chartHelper.legendHeight = height;
+    if (chartHelper.isAutoMarginTop) {
+        chartHelper.chartRectTop = top + height + chartHelper.marginTop;
+    }
 }
 
 
