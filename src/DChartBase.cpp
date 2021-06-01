@@ -230,6 +230,7 @@ void DChartBase::unZoom()
 {
     defaultHorizAxis->unZoom();
     defaultVertAxis->unZoom();
+    chartHelper.isZoomed = false;
 }
 
 void DChartBase::resize(int x, int y, int w, int h)
