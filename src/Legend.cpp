@@ -64,9 +64,9 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
 
     fl_font(2, fontSize);
 
-    int width_limit = chartHelper.chartRectRight - chartHelper.chartRectLeft;
-    int max_width = 0;
-    int width = 0;
+    int widthLimit = chartHelper.chartRectRight - chartHelper.chartRectLeft;
+    int maxWidth = 0;
+    int x = 0;
     std::string caption;
 
     for (int i = 0; i < series.size(); i++) {
@@ -77,19 +77,19 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
         }
         int item_width = fl_width(caption.c_str()) + sampleGap + itemGap + sampleLength;
 
-        if (width + item_width > width_limit - (margin * 2) + 4)
+        if (x + item_width > widthLimit - (margin * 2) + 4)
             if (!legendData.back().empty()) {
-            width = 0;
+            x = 0;
             legendData.push_back(std::vector<LegendData>());
             }
-        legendData.back().push_back(LegendData(width, series[i]->color, series[i]->caption));
-        width += item_width;
-        if (max_width < width) max_width = width;
+        legendData.back().push_back(LegendData(x, series[i]->color, series[i]->caption));
+        x += item_width;
+        if (maxWidth < x) maxWidth = x;
     }
 
-    this->width = max_width + margin * 2 - itemGap;
+    width = maxWidth + margin * 2 - itemGap;
     height = (fl_height() - fl_descent() + margin ) * legendData.size() + margin;
-    left = chartHelper.chartRectLeft + (width_limit - this->width) / 2;
+    left = chartHelper.chartRectLeft + (widthLimit - width) / 2;
 }
 
 
