@@ -229,6 +229,7 @@ void DChartBase::addSeries()
 
     setChartRectSize(w(), h());
     legend.calcSize(series);
+    series.back()->registerOnPropertyChanged([this](){return onSeriesPropertyChanged();});
 }
 
 void DChartBase::unZoom()
@@ -256,4 +257,9 @@ void DChartBase::setChartRectSize(int w, int h)
     chartHelper.chartRectRight = w - chartHelper.marginRight;
 }
 
+void DChartBase::onSeriesPropertyChanged()
+{
+    setChartRectSize(w(), h());
+    legend.calcSize(series);
+}
 

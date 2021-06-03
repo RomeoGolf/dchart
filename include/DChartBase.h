@@ -54,6 +54,7 @@ class DChartBase : public Fl_Widget
         int zoomX;
         int zoomY;
         void setChartRectSize(int w, int h);
+        void onSeriesPropertyChanged();
 };
 
 #endif // DCHARTBASE_H

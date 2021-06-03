@@ -146,10 +146,17 @@ Fl_Color Series::getColor()
 void Series::setCaption(std::string value)
 {
     caption = value;
+    onPropertyChangedSignal();
 }
 
 void Series::setColor(Fl_Color value)
 {
     color = value;
+    onPropertyChangedSignal();
+}
+
+void Series::registerOnPropertyChanged(std::function<void()>handler)
+{
+    onPropertyChangedSignal.connect(handler);
 }
 

@@ -6,9 +6,12 @@
 #include <vector>
 #include <memory>
 #include <string>
+#include <functional>
 
 #include "ChartHelper.h"
 #include "BasicAxis.h"
+
+#include "boost/signals2.hpp"
 
 template<typename T> struct SeriesData
 {
@@ -43,6 +46,7 @@ class Series
         Fl_Color getColor();
         void setCaption(std::string value);
         void setColor(Fl_Color value);
+        void registerOnPropertyChanged(std::function<void()> handler);
 
     protected:
         std::shared_ptr <BasicAxis> horizAxis;
@@ -57,6 +61,7 @@ class Series
         ChartHelper &chartHelper;
         std::string caption;
         Fl_Color color;
+        boost::signals2::signal<void()> onPropertyChangedSignal;
 };
 
 #endif // SERIES_H
