@@ -9,8 +9,8 @@ Legend::Legend(ChartHelper &chartHelper) : chartHelper(chartHelper)
     //ctor
     top = 5;
     left = 100;
-    height = 40;
-    width = 500;
+    height = 30;
+    width = 300;
     isVisible = true;
     fontSize = 16;
 
@@ -18,7 +18,9 @@ Legend::Legend(ChartHelper &chartHelper) : chartHelper(chartHelper)
     sampleLength = 10;
     sampleWidth = 3;
     itemGap = 15;
-    margin = 15;
+    margin = 10;
+    isAutoSize = true;
+    isAutoPosition = true;
 }
 
 Legend::~Legend()
@@ -59,41 +61,183 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
     if (!isVisible) {
         return;
     }
+
+    int widthLimit = chartHelper.chartRectRight - chartHelper.chartRectLeft;
+
     legendData.clear();
     legendData.push_back(std::vector<LegendData>());
 
     fl_font(2, fontSize);
-
-    int widthLimit = chartHelper.chartRectRight - chartHelper.chartRectLeft;
     int maxWidth = 0;
     int x = 0;
     std::string caption;
 
-    for (int i = 0; i < series.size(); i++) {
-        if (!series[i]->getCaption().empty()) {
+    for (int i = 0; i < series.size(); i++)
+    {
+        if (!series[i]->getCaption().empty())
+        {
             caption = series[i]->getCaption();
-        } else {
+        }
+        else
+        {
             caption = "NoName";
         }
         int item_width = fl_width(caption.c_str()) + sampleGap + itemGap + sampleLength;
 
-        if (x + item_width > widthLimit - (margin * 2) + 4)
-            if (!legendData.back().empty()) {
-            x = 0;
-            legendData.push_back(std::vector<LegendData>());
+        if ((x + item_width > widthLimit - (margin * 2) + 4) & isAutoSize)
+            if (!legendData.back().empty())
+            {
+                x = 0;
+                legendData.push_back(std::vector<LegendData>());
             }
         legendData.back().push_back(LegendData(x, series[i]->getColor(), series[i]->getCaption()));
         x += item_width;
         if (maxWidth < x) maxWidth = x;
     }
 
-    width = maxWidth + margin * 2 - itemGap;
-    height = (fl_height() - fl_descent() + margin ) * legendData.size() + margin;
-    left = chartHelper.chartRectLeft + (widthLimit - width) / 2;
+    if (isAutoSize)
+    {
+        width = maxWidth + margin * 2 - itemGap;
+        height = (fl_height() - fl_descent() + margin ) * legendData.size() + margin;
+    }
+
     chartHelper.legendHeight = height;
-    if (chartHelper.isAutoMarginTop) {
-        chartHelper.chartRectTop = top + height + chartHelper.marginTop;
+
+    if (isAutoPosition) {
+        left = chartHelper.chartRectLeft + (widthLimit - width) / 2;
+        if (chartHelper.isAutoMarginTop) {
+            chartHelper.chartRectTop = top + height + chartHelper.marginTop;
+        }
     }
 }
 
+void Legend::setTop(int value)
+{
+    top = value;
+}
+
+void Legend::setLeft(int value)
+{
+    left = value;
+}
+
+void Legend::setHeight(int value)
+{
+    height = value;
+}
+
+void Legend::setWidth(int value)
+{
+    width = value;
+}
+
+void Legend::setVisible(bool value)
+{
+    isVisible = value;
+}
+
+void Legend::setFontSize(int value)
+{
+    fontSize = value;
+}
+
+void Legend::setSampleGap(int value)
+{
+    sampleGap = value;
+}
+
+void Legend::setSampleLength(int value)
+{
+    sampleLength = value;
+}
+
+void Legend::setSampleWidth(int value)
+{
+    sampleWidth = value;
+}
+
+void Legend::setItemGap(int value)
+{
+    itemGap = value;
+}
+
+void Legend::setMargin(int value)
+{
+    margin = value;
+}
+
+void Legend::setAutoSize(bool value)
+{
+    isAutoSize = value;
+}
+
+void Legend::setAutoPosition(bool value)
+{
+    isAutoPosition = value;
+}
+
+int Legend::getTop()
+{
+    return top;
+}
+
+int Legend::getLeft()
+{
+    return left;
+}
+
+int Legend::getHeight()
+{
+    return height;
+}
+
+int Legend::getWidth()
+{
+    return width;
+}
+
+bool Legend::getVisible()
+{
+    return isVisible;
+}
+
+int Legend::getFontSize()
+{
+    return fontSize;
+}
+
+int Legend::getSampleGap()
+{
+    return sampleGap;
+}
+
+int Legend::getSampleLength()
+{
+    return sampleLength;
+}
+
+int Legend::getSampleWidth()
+{
+    return sampleWidth;
+}
+
+int Legend::getItemGap()
+{
+    return itemGap;
+}
+
+int Legend::getMargin()
+{
+    return margin;
+}
+
+bool Legend::getAutoSize()
+{
+    return isAutoSize;
+}
+
+bool Legend::getAutoPosition()
+{
+    return isAutoPosition;
+}
 
