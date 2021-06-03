@@ -70,8 +70,8 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
     std::string caption;
 
     for (int i = 0; i < series.size(); i++) {
-        if (!series[i]->caption.empty()) {
-            caption = series[i]->caption;
+        if (!series[i]->getCaption().empty()) {
+            caption = series[i]->getCaption();
         } else {
             caption = "NoName";
         }
@@ -82,7 +82,7 @@ void Legend::calcSize(std::vector<std::unique_ptr<Series>>& series)
             x = 0;
             legendData.push_back(std::vector<LegendData>());
             }
-        legendData.back().push_back(LegendData(x, series[i]->color, series[i]->caption));
+        legendData.back().push_back(LegendData(x, series[i]->getColor(), series[i]->getCaption()));
         x += item_width;
         if (maxWidth < x) maxWidth = x;
     }

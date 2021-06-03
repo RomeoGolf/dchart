@@ -225,7 +225,7 @@ void DChartBase::addSeries()
     series.push_back(std::make_unique<Series>(chartHelper));
     series.back()->setHorizAxis(defaultHorizAxis);
     series.back()->setVertAxis(defaultVertAxis);
-    series.back()->caption = "Series_" + std::to_string(series.size());
+    series.back()->setCaption("Series_" + std::to_string(series.size()));
 
     setChartRectSize(w(), h());
     legend.calcSize(series);

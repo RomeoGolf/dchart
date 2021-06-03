@@ -38,10 +38,11 @@ class Series
         double getMaxY();
         double getMinX();
         double getMinY();
-        //void setColor(Fl_Color color);
 
-        std::string caption;
-        Fl_Color color;
+        std::string getCaption();
+        Fl_Color getColor();
+        void setCaption(std::string value);
+        void setColor(Fl_Color value);
 
     protected:
         std::shared_ptr <BasicAxis> horizAxis;
@@ -54,6 +55,8 @@ class Series
 
     private:
         ChartHelper &chartHelper;
+        std::string caption;
+        Fl_Color color;
 };
 
 #endif // SERIES_H

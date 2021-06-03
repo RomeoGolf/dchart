@@ -132,3 +132,24 @@ double Series::getMinY()
 {
     return minY;
 }
+
+std::string Series::getCaption()
+{
+    return caption;
+}
+
+Fl_Color Series::getColor()
+{
+    return color;
+}
+
+void Series::setCaption(std::string value)
+{
+    caption = value;
+}
+
+void Series::setColor(Fl_Color value)
+{
+    color = value;
+}
+
