@@ -25,12 +25,12 @@ class Legend
 
         void draw();
         void calcSize(std::vector<std::unique_ptr<Series>>& series);
-        std::vector<std::vector<LegendData>> legendData;
 
     protected:
 
     private:
         ChartHelper &chartHelper;
+        std::vector<std::vector<LegendData>> legendData;
         int top;
         int left;
         int height;
