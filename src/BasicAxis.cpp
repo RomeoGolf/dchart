@@ -87,7 +87,7 @@ void BasicAxis::doAutoSize(double minVal, double maxVal)
         if (minVal < minimum) setMinimum(minVal);
         if (maxVal > maximum) setMaximum(maxVal);
     }
-    if (getAutoZoom()) {
+    if (getAutoZoom() & !chartHelper.isZoomed) {
         visibleMinimum = minimum;
         visibleMaximum = maximum;
     }
