@@ -27,6 +27,7 @@ class BasicSeries
         virtual ~BasicSeries();
 
         virtual void draw() = 0;
+        //virtual void addXY(double x, double y) = 0;
 
         std::vector<SeriesData<double>> data;
         void setHorizAxis(std::shared_ptr <BasicAxis> value);
@@ -35,7 +36,6 @@ class BasicSeries
         std::shared_ptr<BasicAxis> getHorizAxis();
         std::shared_ptr<BasicAxis> getVertAxis();
 
-        void addXY(double x, double y);
         int getFloorIndexOfX(double x);
         void sortByX();
         double getMaxX();

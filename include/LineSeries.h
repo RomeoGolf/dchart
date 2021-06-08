@@ -11,6 +11,7 @@ class LineSeries : public BasicSeries
         virtual ~LineSeries();
 
         virtual void draw() override;
+        virtual void addXY(double x, double y);// override;
 
 
     protected:

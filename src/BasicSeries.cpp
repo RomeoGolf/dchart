@@ -19,7 +19,7 @@ BasicSeries::~BasicSeries()
 {
     //dtor
 }
-
+/*
 void BasicSeries::addXY(double x, double y)
 {
     data.push_back(SeriesData<double>(x, y));
@@ -33,7 +33,7 @@ void BasicSeries::addXY(double x, double y)
     horizAxis->doAutoSize(minX, maxX);
     vertAxis->doAutoSize(minY, maxY);
 }
-
+*/
 int BasicSeries::getFloorIndexOfX(double x)
 {
     if (x >= data.back().xValue)

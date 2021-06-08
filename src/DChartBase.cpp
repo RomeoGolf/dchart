@@ -57,7 +57,7 @@ void DChartBase::draw()
             drawZoomRect();
         }
 
-        std::vector<std::unique_ptr<BasicSeries>>::const_iterator item;
+        std::vector<std::shared_ptr<BasicSeries>>::const_iterator item;
         for (item = series.begin(); item != series.end(); ++item) {
             (*item)->draw();
         }
@@ -214,7 +214,7 @@ void DChartBase::drawChartBorder()
 
 void DChartBase::addLineSeries()
 {
-    series.push_back(std::make_unique<LineSeries>(chartHelper));
+    series.push_back(std::make_shared<LineSeries>(chartHelper));
     series.back()->setHorizAxis(defaultHorizAxis);
     series.back()->setVertAxis(defaultVertAxis);
     series.back()->setCaption("Series_" + std::to_string(series.size()));

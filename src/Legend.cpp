@@ -56,7 +56,7 @@ void Legend::draw()
     }
 }
 
-void Legend::calcSize(std::vector<std::unique_ptr<BasicSeries>>& series)
+void Legend::calcSize(std::vector<std::shared_ptr<BasicSeries>>& series)
 {
     if (!isVisible) {
         return;

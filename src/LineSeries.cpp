@@ -40,3 +40,16 @@ void LineSeries::draw()
     fl_end_line();
 }
 
+void LineSeries::addXY(double x, double y)
+{
+    data.push_back(SeriesData<double>(x, y));
+    isSorted = false;
+
+    minX = x < minX ? x : minX;
+    minY = y < minY ? y : minY;
+    maxX = x > maxX ? x : maxX;
+    maxY = y > maxY ? y : maxY;
+
+    horizAxis->doAutoSize(minX, maxX);
+    vertAxis->doAutoSize(minY, maxY);
+}
