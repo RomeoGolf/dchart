@@ -151,7 +151,15 @@ void Series::setCaption(std::string value)
 
 void Series::setColor(Fl_Color value)
 {
+    int colorIndex = chartHelper.getColorIndex(color);
+    if (colorIndex >= 0 && chartHelper.colorIndicesUsing[colorIndex] > 0) {
+        chartHelper.colorIndicesUsing[colorIndex]--;
+    }
     color = value;
+    colorIndex = chartHelper.getColorIndex(value);
+    if (colorIndex >= 0) {
+        chartHelper.colorIndicesUsing[colorIndex]++;
+    }
     onPropertyChangedSignal();
 }
 
@@ -159,4 +167,6 @@ void Series::registerOnPropertyChanged(std::function<void()>handler)
 {
     onPropertyChangedSignal.connect(handler);
 }
+
+
 

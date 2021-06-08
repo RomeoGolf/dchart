@@ -57,6 +57,7 @@ class Series
         double maxY;
         double minY;
 
+
     private:
         ChartHelper &chartHelper;
         std::string caption;

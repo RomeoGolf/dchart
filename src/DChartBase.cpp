@@ -226,6 +226,9 @@ void DChartBase::addSeries()
     series.back()->setHorizAxis(defaultHorizAxis);
     series.back()->setVertAxis(defaultVertAxis);
     series.back()->setCaption("Series_" + std::to_string(series.size()));
+    int colorIndex = chartHelper.getRarestColorIndex();
+    series.back()->setColor(ChartHelper::colors[colorIndex]);
+    //chartHelper.colorIndicesUsing[colorIndex]++;
 
     setChartRectSize(w(), h());
     legend.calcSize(series);
