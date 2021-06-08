@@ -8,30 +8,20 @@ class BasicAxis
     public:
         BasicAxis(ChartHelper &chartHelper);
         virtual ~BasicAxis();
-        /*
-    property GridPen : TPen read FGridPen write SetGridPen;
-    property MarginSpacing : boolean read FMarginSpacing write SetMarginSpacing;
-    property DateTime : boolean read FDateTime write SetDateTime;
 
-    property InMargin : boolean read FInMargin write SetInMargin;
+        void setMouseStartX(int value);
+        void setMouseStartY(int value);
+        void setMouseNowX(int value);
+        void setMouseNowY(int value);
 
-    // (max - min), при котором появляются дробные значения шкалы (0 - никогда)
-    property MinDeltaForIntegerScale : real read FMinDeltaForIntegerScale write SetMinDeltaForIntegerScale;
-    property ZoomDeny : boolean read FZoomDeny write SetZoomDeny;
+        double getVisibleMaximum();
+        double getVisibleMinimum();
+        void setVisibleMaximum(double value);
+        void setVisibleMinimum(double value);
+        void setOldVisibleMaximum(double value);
+        void setOldVisibleMinimum(double value);
 
-    procedure CalcStartMarkUnit();
-    procedure GetStartLabelValue();
-        */
-
-        int mouseStartX;
-        int mouseStartY;
-        int mouseNowX;
-        int mouseNowY;
-        double oldVisibleMaximum;
-        double oldVisibleMinimum;
-        double visibleMaximum;
-        double visibleMinimum;
-        double sizeCoeff;
+        double getSizeCoeff();
 
         void setVisible(bool value);
         bool getVisible();
@@ -42,7 +32,6 @@ class BasicAxis
         bool getAutoZoom();
         void doAutoSize(double minVal, double maxVal);
 
-
         void incSeriesNum();
         void decSeriesNum();
         int getSeriesNum();
@@ -52,7 +41,6 @@ class BasicAxis
         void setMaximum(double value);
         double getMaximum();
 
-
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
         virtual void shiftByMouse() = 0;
@@ -61,9 +49,19 @@ class BasicAxis
     protected:
         ChartHelper &chartHelper;
 
+        int mouseStartX;
+        int mouseStartY;
+        int mouseNowX;
+        int mouseNowY;
+
+        double oldVisibleMaximum;
+        double oldVisibleMinimum;
+        double visibleMaximum;
+        double visibleMinimum;
+        double sizeCoeff;
+
         double maximum;
         double minimum;
-
 
         double step;
         bool isAutoZoom;

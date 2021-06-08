@@ -42,16 +42,16 @@ void Series::draw()
 
     fl_begin_line();
 
-    int xStart = getFloorIndexOfX(horizAxis->visibleMinimum);
-    int xEnd = getFloorIndexOfX(horizAxis->visibleMaximum);
+    int xStart = getFloorIndexOfX(horizAxis->getVisibleMinimum());
+    int xEnd = getFloorIndexOfX(horizAxis->getVisibleMaximum());
     if (xEnd + 1 < data.size()) xEnd++;
 
     for (int i = xStart; i <= xEnd; i++) {
-        double x = data[i].xValue - horizAxis->visibleMinimum;
-        double y = data[i].yValue - vertAxis->visibleMinimum;
+        double x = data[i].xValue - horizAxis->getVisibleMinimum();
+        double y = data[i].yValue - vertAxis->getVisibleMinimum();
 
-        int cx = ceil(x * horizAxis->sizeCoeff) + chartHelper.marginLeft;
-        int cy = ceil(chartHelper.chartRectBottom - y * vertAxis->sizeCoeff);
+        int cx = ceil(x * horizAxis->getSizeCoeff()) + chartHelper.marginLeft;
+        int cy = ceil(chartHelper.chartRectBottom - y * vertAxis->getSizeCoeff());
 
         fl_vertex(cx, cy);
     }

@@ -17,28 +17,14 @@ class DChartBase : public Fl_Widget
         DChartBase(int x, int y, int w, int h, const char *label);
         virtual ~DChartBase();
 
-        ChartHelper chartHelper;
-        Legend legend;
-
         void test();
         void drawZoomRect();
 
-        int mouseStartX;
-        int mouseStartY;
-        int mouseNowX;
-        int mouseNowY;
-        bool isZoom;
-        bool isRightMouseButtonDown;
-
-        bool needWidgetBorder;
-        bool needChartBorder;
         void drawWidgetBorder();
         void drawChartBorder();
         void unZoom();
 
         std::vector<std::unique_ptr<Series>> series;
-        //Series *series;
-        //void addSeries(Series *s);
         void addSeries();
         std::shared_ptr <BasicAxis> defaultHorizAxis;
         std::shared_ptr <BasicAxis> defaultVertAxis;
@@ -49,10 +35,24 @@ class DChartBase : public Fl_Widget
     protected:
         void draw();
 
-
     private:
         int zoomX;
         int zoomY;
+
+        int mouseStartX;
+        int mouseStartY;
+        int mouseNowX;
+        int mouseNowY;
+
+        bool isZoom;
+        bool isRightMouseButtonDown;
+
+        bool needWidgetBorder;
+        bool needChartBorder;
+
+        ChartHelper chartHelper;
+        Legend legend;
+
         void setChartRectSize(int w, int h);
         void onSeriesPropertyChanged();
 };

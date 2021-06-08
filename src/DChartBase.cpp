@@ -115,10 +115,10 @@ int DChartBase::handle(int event)
         mouseStartX = Fl::event_x() - x();
         mouseStartY = Fl::event_y() - y();
 
-        defaultHorizAxis->mouseStartX = mouseStartX;
-        defaultHorizAxis->mouseStartY = mouseStartY;
-        defaultVertAxis->mouseStartX = mouseStartX;
-        defaultVertAxis->mouseStartY = mouseStartY;
+        defaultHorizAxis->setMouseStartX(mouseStartX);
+        defaultHorizAxis->setMouseStartY(mouseStartY);
+        defaultVertAxis->setMouseStartX(mouseStartX);
+        defaultVertAxis->setMouseStartY(mouseStartY);
 
         switch (Fl::event_button())
         {
@@ -126,10 +126,10 @@ int DChartBase::handle(int event)
                 isZoom = true;
                 break;
             case FL_RIGHT_MOUSE :
-                defaultHorizAxis->oldVisibleMaximum = defaultHorizAxis->visibleMaximum;
-                defaultHorizAxis->oldVisibleMinimum = defaultHorizAxis->visibleMinimum;
-                defaultVertAxis->oldVisibleMaximum = defaultVertAxis->visibleMaximum;
-                defaultVertAxis->oldVisibleMinimum = defaultVertAxis->visibleMinimum;
+                defaultHorizAxis->setOldVisibleMaximum(defaultHorizAxis->getVisibleMaximum());
+                defaultHorizAxis->setOldVisibleMinimum(defaultHorizAxis->getVisibleMinimum());
+                defaultVertAxis->setOldVisibleMaximum(defaultVertAxis->getVisibleMaximum());
+                defaultVertAxis->setOldVisibleMinimum(defaultVertAxis->getVisibleMinimum());
                 isRightMouseButtonDown = true;
                 break;
         }
@@ -149,12 +149,12 @@ int DChartBase::handle(int event)
                         redraw();
                         break;
                     }
-                    defaultHorizAxis->mouseNowX = mouseNowX;
-                    defaultHorizAxis->mouseNowY = mouseNowY;
+                    defaultHorizAxis->setMouseNowX(mouseNowX);
+                    defaultHorizAxis->setMouseNowY(mouseNowY);
                     defaultHorizAxis->zoomByMouse();
 
-                    defaultVertAxis->mouseNowX = mouseNowX;
-                    defaultVertAxis->mouseNowY = mouseNowY;
+                    defaultVertAxis->setMouseNowX(mouseNowX);
+                    defaultVertAxis->setMouseNowY(mouseNowY);
                     defaultVertAxis->zoomByMouse();
 
                     chartHelper.isZoomed = true;
@@ -173,12 +173,12 @@ int DChartBase::handle(int event)
             redraw();
         }
         if (isRightMouseButtonDown) {
-            defaultHorizAxis->mouseNowX = mouseNowX;
-            defaultHorizAxis->mouseNowY = mouseNowY;
+            defaultHorizAxis->setMouseNowX(mouseNowX);
+            defaultHorizAxis->setMouseNowY(mouseNowY);
             defaultHorizAxis->shiftByMouse();
 
-            defaultVertAxis->mouseNowX = mouseNowX;
-            defaultVertAxis->mouseNowY = mouseNowY;
+            defaultVertAxis->setMouseNowX(mouseNowX);
+            defaultVertAxis->setMouseNowY(mouseNowY);
             defaultVertAxis->shiftByMouse();
             redraw();
         }

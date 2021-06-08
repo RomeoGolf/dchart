@@ -5,9 +5,6 @@
 
 #include <vector>
 
-
-
-
 class ChartHelper
 {
     public:

@@ -139,5 +139,58 @@ int BasicAxis::getSeriesNum()
    return seriesNum;
 }
 
+void BasicAxis::setMouseStartX(int value)
+{
+    mouseStartX = value;
+}
 
+void BasicAxis::setMouseStartY(int value)
+{
+    mouseStartY = value;
+}
+
+void BasicAxis::setMouseNowX(int value)
+{
+    mouseNowX = value;
+}
+
+void BasicAxis::setMouseNowY(int value)
+{
+    mouseNowY = value;
+}
+
+double BasicAxis::getVisibleMaximum()
+{
+    return visibleMaximum;
+}
+
+double BasicAxis::getVisibleMinimum()
+{
+    return visibleMinimum;
+}
+
+void BasicAxis::setVisibleMaximum(double value)
+{
+    visibleMaximum = value;
+}
+
+void BasicAxis::setVisibleMinimum(double value)
+{
+    visibleMinimum = value;
+}
+
+void BasicAxis::setOldVisibleMaximum(double value)
+{
+    oldVisibleMaximum = value;
+}
+
+void BasicAxis::setOldVisibleMinimum(double value)
+{
+    oldVisibleMinimum = value;
+}
+
+double BasicAxis::getSizeCoeff()
+{
+    return sizeCoeff;
+}
 
