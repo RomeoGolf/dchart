@@ -57,7 +57,7 @@ void DChartBase::draw()
             drawZoomRect();
         }
 
-        std::vector<std::unique_ptr<Series>>::const_iterator item;
+        std::vector<std::unique_ptr<BasicSeries>>::const_iterator item;
         for (item = series.begin(); item != series.end(); ++item) {
             (*item)->draw();
         }
@@ -210,25 +210,16 @@ void DChartBase::drawChartBorder()
                     chartHelper.chartRectBottom - chartHelper.chartRectTop,
                  FL_BACKGROUND_COLOR);
     }
-
 }
 
-/*void DChartBase::addSeries(Series* s)
+void DChartBase::addLineSeries()
 {
-    series = s;
-    s->horizAxis = defaultHorizAxis;
-    s->vertAxis = defaultVertAxis;
-}*/
-
-void DChartBase::addSeries()
-{
-    series.push_back(std::make_unique<Series>(chartHelper));
+    series.push_back(std::make_unique<LineSeries>(chartHelper));
     series.back()->setHorizAxis(defaultHorizAxis);
     series.back()->setVertAxis(defaultVertAxis);
     series.back()->setCaption("Series_" + std::to_string(series.size()));
     int colorIndex = chartHelper.getRarestColorIndex();
     series.back()->setColor(ChartHelper::colors[colorIndex]);
-    //chartHelper.colorIndicesUsing[colorIndex]++;
 
     setChartRectSize(w(), h());
     legend.calcSize(series);

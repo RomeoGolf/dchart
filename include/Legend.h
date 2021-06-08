@@ -7,7 +7,7 @@
 #include <memory>
 #include <string>
 
-#include <Series.h>
+#include <BasicSeries.h>
 
 struct LegendData {
     int startX;
@@ -24,7 +24,7 @@ class Legend
         virtual ~Legend();
 
         void draw();
-        void calcSize(std::vector<std::unique_ptr<Series>>& series);
+        void calcSize(std::vector<std::unique_ptr<BasicSeries>>& series);
 
         void setTop(int value);
         void setLeft (int value);

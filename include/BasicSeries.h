@@ -20,11 +20,13 @@ template<typename T> struct SeriesData
     SeriesData(double x, T y) : xValue(x), yValue(y) {}
 };
 
-class Series
+class BasicSeries
 {
     public:
-        Series(ChartHelper &chartHelper);
-        virtual ~Series();
+        BasicSeries(ChartHelper &chartHelper);
+        virtual ~BasicSeries();
+
+        virtual void draw() = 0;
 
         std::vector<SeriesData<double>> data;
         void setHorizAxis(std::shared_ptr <BasicAxis> value);
@@ -34,7 +36,6 @@ class Series
         std::shared_ptr<BasicAxis> getVertAxis();
 
         void addXY(double x, double y);
-        void draw();
         int getFloorIndexOfX(double x);
         void sortByX();
         double getMaxX();
@@ -49,19 +50,18 @@ class Series
         void registerOnPropertyChanged(std::function<void()> handler);
 
     protected:
+        ChartHelper &chartHelper;
         std::shared_ptr <BasicAxis> horizAxis;
         std::shared_ptr <BasicAxis> vertAxis;
         bool isSorted;
+        Fl_Color color;
+        std::string caption;
         double maxX;
         double minX;
         double maxY;
         double minY;
 
-
     private:
-        ChartHelper &chartHelper;
-        std::string caption;
-        Fl_Color color;
         boost::signals2::signal<void()> onPropertyChangedSignal;
 };
 

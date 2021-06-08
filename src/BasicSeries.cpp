@@ -1,13 +1,12 @@
-#include "Series.h"
+#include "BasicSeries.h"
 
-#include <FL/Fl.H>
-#include <FL/fl_draw.H>
+
 
 #include <math.h>
 #include <iostream>
 #include <algorithm>
 
-Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
+BasicSeries::BasicSeries(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
     //ctor
     minX = std::numeric_limits<double>::max();
@@ -16,12 +15,12 @@ Series::Series(ChartHelper &chartHelper) : chartHelper(chartHelper)
     maxY = -std::numeric_limits<double>::max();
 }
 
-Series::~Series()
+BasicSeries::~BasicSeries()
 {
     //dtor
 }
 
-void Series::addXY(double x, double y)
+void BasicSeries::addXY(double x, double y)
 {
     data.push_back(SeriesData<double>(x, y));
     isSorted = false;
@@ -35,31 +34,7 @@ void Series::addXY(double x, double y)
     vertAxis->doAutoSize(minY, maxY);
 }
 
-void Series::draw()
-{
-    fl_color(color);
-    fl_line_style(0);
-
-    fl_begin_line();
-
-    int xStart = getFloorIndexOfX(horizAxis->getVisibleMinimum());
-    int xEnd = getFloorIndexOfX(horizAxis->getVisibleMaximum());
-    if (xEnd + 1 < data.size()) xEnd++;
-
-    for (int i = xStart; i <= xEnd; i++) {
-        double x = data[i].xValue - horizAxis->getVisibleMinimum();
-        double y = data[i].yValue - vertAxis->getVisibleMinimum();
-
-        int cx = ceil(x * horizAxis->getSizeCoeff()) + chartHelper.marginLeft;
-        int cy = ceil(chartHelper.chartRectBottom - y * vertAxis->getSizeCoeff());
-
-        fl_vertex(cx, cy);
-    }
-
-    fl_end_line();
-}
-
-int Series::getFloorIndexOfX(double x)
+int BasicSeries::getFloorIndexOfX(double x)
 {
     if (x >= data.back().xValue)
         return data.size() - 1;
@@ -82,7 +57,7 @@ int Series::getFloorIndexOfX(double x)
     return xStart;
 }
 
-void Series::sortByX()
+void BasicSeries::sortByX()
 {
     std::sort(data.begin(), data.end( ), [ ]( const auto& lhs, const auto& rhs )
     {
@@ -91,65 +66,65 @@ void Series::sortByX()
     isSorted = true;
 }
 
-void Series::setHorizAxis(std::shared_ptr<BasicAxis> value)
+void BasicSeries::setHorizAxis(std::shared_ptr<BasicAxis> value)
 {
     this->horizAxis = value;
     horizAxis->incSeriesNum();
 }
 
-void Series::setVertAxis(std::shared_ptr<BasicAxis> value)
+void BasicSeries::setVertAxis(std::shared_ptr<BasicAxis> value)
 {
     this->vertAxis = value;
     this->vertAxis->incSeriesNum();
 }
 
-std::shared_ptr<BasicAxis> Series::getHorizAxis()
+std::shared_ptr<BasicAxis> BasicSeries::getHorizAxis()
 {
     return horizAxis;
 }
 
-std::shared_ptr<BasicAxis> Series::getVertAxis()
+std::shared_ptr<BasicAxis> BasicSeries::getVertAxis()
 {
     return vertAxis;
 }
 
-double Series::getMaxX()
+double BasicSeries::getMaxX()
 {
     return maxX;
 }
 
-double Series::getMaxY()
+double BasicSeries::getMaxY()
 {
     return maxY;
 }
 
-double Series::getMinX()
+double BasicSeries::getMinX()
 {
     return minX;
 }
 
-double Series::getMinY()
+double BasicSeries::getMinY()
 {
     return minY;
 }
 
-std::string Series::getCaption()
+std::string BasicSeries::getCaption()
 {
     return caption;
 }
 
-Fl_Color Series::getColor()
+Fl_Color BasicSeries::getColor()
 {
     return color;
 }
 
-void Series::setCaption(std::string value)
+void BasicSeries::setCaption(std::string value)
 {
     caption = value;
     onPropertyChangedSignal();
 }
 
-void Series::setColor(Fl_Color value)
+void BasicSeries::setColor(Fl_Color value)
 {
     int colorIndex = chartHelper.getColorIndex(color);
     if (colorIndex >= 0 && chartHelper.colorIndicesUsing[colorIndex] > 0) {
@@ -163,7 +138,7 @@ void Series::setColor(Fl_Color value)
     onPropertyChangedSignal();
 }
 
-void Series::registerOnPropertyChanged(std::function<void()>handler)
+void BasicSeries::registerOnPropertyChanged(std::function<void()>handler)
 {
     onPropertyChangedSignal.connect(handler);
 }

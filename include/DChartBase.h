@@ -2,7 +2,8 @@
 #define DCHARTBASE_H
 
 #include <FL/Fl_Widget.H>
-#include <Series.h>
+#include <BasicSeries.h>
+#include <LineSeries.h>
 #include <BasicAxis.h>
 #include <HorizAxis.h>
 #include <VertAxis.h>
@@ -24,8 +25,8 @@ class DChartBase : public Fl_Widget
         void drawChartBorder();
         void unZoom();
 
-        std::vector<std::unique_ptr<Series>> series;
-        void addSeries();
+        std::vector<std::unique_ptr<BasicSeries>> series;
+        void addLineSeries();
         std::shared_ptr <BasicAxis> defaultHorizAxis;
         std::shared_ptr <BasicAxis> defaultVertAxis;
 
