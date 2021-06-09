@@ -27,8 +27,16 @@ class DChartBase : public Fl_Widget
 
         std::vector<std::shared_ptr<BasicSeries>> series;
         void addLineSeries();
-        std::shared_ptr <BasicAxis> defaultHorizAxis;
-        std::shared_ptr <BasicAxis> defaultVertAxis;
+
+
+        //std::shared_ptr <BasicAxis> defaultHorizAxis;
+        //std::shared_ptr <BasicAxis> defaultVertAxis;
+
+        std::vector<std::shared_ptr <BasicAxis>> horizAxes;
+        std::vector<std::shared_ptr <BasicAxis>> vertAxes;
+
+        void addVertAxis();
+        void addHorizAxis();
 
         virtual int handle(int event) override;
         virtual void resize(int x, int y, int w, int h) override;
