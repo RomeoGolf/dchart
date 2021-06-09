@@ -41,6 +41,9 @@ class BasicAxis
         void setMaximum(double value);
         double getMaximum();
 
+        bool getIsFixed();
+        void setIsFixed(bool value);
+
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
         virtual void shiftByMouse() = 0;
@@ -48,6 +51,8 @@ class BasicAxis
 
     protected:
         ChartHelper &chartHelper;
+
+        bool isFixed;
 
         int mouseStartX;
         int mouseStartY;
@@ -68,6 +73,7 @@ class BasicAxis
         bool isAutoSize;
         bool isAutoStep;
         bool isVisible;
+
         double unitSize;
         double visibleUnitSize;
         int pixelSize;

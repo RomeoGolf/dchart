@@ -13,6 +13,11 @@ BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
     visibleMaximum = maximum;
     seriesNum = 0;
 
+    isFixed = false;
+    isAutoZoom = true;
+    isAutoSize = true;
+    isAutoStep = true;
+    isVisible = true;
 }
 
 BasicAxis::~BasicAxis()
@@ -78,7 +83,7 @@ bool BasicAxis::getAutoZoom()
 
 void BasicAxis::doAutoSize(double minVal, double maxVal)
 {
-    if (!getAutoSize()) return;
+    if (!getAutoSize() || getIsFixed()) return;
     if (seriesNum < 1) return;
     if (seriesNum == 1) {
         setMinimum(minVal);
@@ -193,4 +198,15 @@ double BasicAxis::getSizeCoeff()
 {
     return sizeCoeff;
 }
+
+bool BasicAxis::getIsFixed()
+{
+    return isFixed;
+}
+
+void BasicAxis::setIsFixed(bool value)
+{
+    isFixed = value;
+}
+
 

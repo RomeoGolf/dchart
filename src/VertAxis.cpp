@@ -122,6 +122,8 @@ void VertAxis::draw()
 
 void VertAxis::zoomByMouse()
 {
+    if (isFixed) return;
+
     double oldCoeff;
     int height1;
     int height2;
@@ -140,6 +142,8 @@ void VertAxis::zoomByMouse()
 
 void VertAxis::shiftByMouse()
 {
+    if (isFixed) return;
+
     if (sizeCoeff != 0) {
         axisShift = (mouseNowY - mouseStartY) / sizeCoeff;
     } else {
