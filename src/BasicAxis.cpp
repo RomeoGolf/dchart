@@ -13,6 +13,10 @@ BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
     visibleMaximum = maximum;
     seriesNum = 0;
 
+    gridColor = FL_BLUE;
+    fontColor = FL_BLACK;
+    fontSize = 14;
+
     isFixed = false;
     isAutoZoom = true;
     isAutoSize = true;
@@ -209,4 +213,33 @@ void BasicAxis::setIsFixed(bool value)
     isFixed = value;
 }
 
+int BasicAxis::getFontSize()
+{
+    return fontSize;
+}
+
+Fl_Color BasicAxis::getGridColor()
+{
+    return gridColor;
+}
+
+Fl_Color BasicAxis::getFontColor()
+{
+    return fontColor;
+}
+
+void BasicAxis::setFontSize(int value)
+{
+    fontSize = value;
+}
+
+void BasicAxis::setGridColor(Fl_Color value)
+{
+    gridColor = value;
+}
+
+void BasicAxis::setFontColor(Fl_Color value)
+{
+    fontColor = value;
+}
 

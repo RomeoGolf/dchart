@@ -44,6 +44,13 @@ class BasicAxis
         bool getIsFixed();
         void setIsFixed(bool value);
 
+        int getFontSize();
+        void setFontSize(int value);
+        Fl_Color getGridColor();
+        void setGridColor(Fl_Color value);
+        Fl_Color getFontColor();
+        void setFontColor(Fl_Color value);
+
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
         virtual void shiftByMouse() = 0;
@@ -80,6 +87,10 @@ class BasicAxis
         double startMarkUnit;
         double startlabelValue;
         double axisShift;
+
+        int fontSize;
+        Fl_Color fontColor;
+        Fl_Color gridColor;
 
         void setSizeCoeff();
         void calcStartMarkUnit();

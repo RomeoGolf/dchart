@@ -68,6 +68,7 @@ void VertAxis::draw()
     pixelSize = (chartHelper.chartRectBottom - chartHelper.chartRectTop);
     if (pixelSize < 5) return;
 
+    fl_font(0, fontSize);
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
@@ -109,11 +110,12 @@ void VertAxis::draw()
     }*/
 
     for (int i = 0; i < notches.size(); i++) {
-        fl_color(FL_BLACK);
+        fl_font(0, fontSize);
+        fl_color(fontColor);
         fl_draw(notches[i].label.c_str(),
                 chartHelper.chartRectLeft - notches[i].w,
                 b_bottom - notches[i].h);
-        fl_color(FL_BLUE);
+        fl_color(gridColor);
         fl_line_style(FL_DOT, 1);
         fl_line(chartHelper.chartRectLeft - 5, b_bottom - notches[i].y,
                 chartHelper.chartRectRight, b_bottom - notches[i].y);
