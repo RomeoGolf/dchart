@@ -83,7 +83,7 @@ bool BasicAxis::getAutoZoom()
 
 void BasicAxis::doAutoSize(double minVal, double maxVal)
 {
-    if (!getAutoSize() || getIsFixed()) return;
+    if (!getAutoSize() && getIsFixed()) return;
     if (seriesNum < 1) return;
     if (seriesNum == 1) {
         setMinimum(minVal);
