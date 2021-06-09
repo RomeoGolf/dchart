@@ -13,6 +13,9 @@ Legend::Legend(ChartHelper &chartHelper) : chartHelper(chartHelper)
     width = 300;
     isVisible = true;
     fontSize = 16;
+    fontFace = FL_HELVETICA_ITALIC;
+    fontColor = FL_BLACK;
+    backColor = FL_WHITE;
 
     sampleGap = 5;
     sampleLength = 10;
@@ -33,14 +36,14 @@ void Legend::draw()
     if (!isVisible) return;
     if (legendData.empty()) return;
 
-    fl_font(2, fontSize);
-    fl_draw_box(FL_ENGRAVED_BOX, left, top, width, height, FL_BACKGROUND_COLOR);
+    fl_font(fontFace, fontSize);
+    fl_draw_box(FL_ENGRAVED_BOX, left, top, width, height, backColor);
 
     int y = top + margin + fl_height() - fl_descent();
     for (int i = 0; i < legendData.size(); i++) {
         for (int j = 0; j < legendData[i].size(); j++) {
             int startX = left + margin + legendData[i][j].startX;
-            fl_color(FL_BLACK);
+            fl_color(fontColor);
             fl_draw(legendData[i][j].caption.c_str(), startX + sampleLength + sampleGap, y);
             //std::cout << "[legend draw] caption: " << legendData[i][j].caption
             //    << " x: " << legendData[i][j].startX << std::endl;
@@ -67,7 +70,7 @@ void Legend::calcSize(std::vector<std::shared_ptr<BasicSeries>>& series)
     legendData.clear();
     legendData.push_back(std::vector<LegendData>());
 
-    fl_font(2, fontSize);
+    fl_font(fontFace, fontSize);
     int maxWidth = 0;
     int x = 0;
     std::string caption;
@@ -239,5 +242,35 @@ bool Legend::getAutoSize()
 bool Legend::getAutoPosition()
 {
     return isAutoPosition;
+}
+
+void Legend::setFontColor(Fl_Color value)
+{
+    fontColor = value;
+}
+
+void Legend::setFontFace(int value)
+{
+    fontFace = value;
+}
+
+Fl_Color Legend::getFontColor()
+{
+    return fontColor;
+}
+
+int Legend::getFontFace()
+{
+    return fontFace;
+}
+
+void Legend::setBackColor(Fl_Color value)
+{
+    backColor = value;
+}
+
+Fl_Color Legend::getBackColor()
+{
+    return backColor;
 }
 

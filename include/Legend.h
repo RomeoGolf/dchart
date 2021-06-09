@@ -27,18 +27,21 @@ class Legend
         void calcSize(std::vector<std::shared_ptr<BasicSeries>>& series);
 
         void setTop(int value);
-        void setLeft (int value);
-        void setHeight (int value);
-        void setWidth (int value);
-        void setVisible (bool value);
-        void setFontSize (int value);
-        void setSampleGap (int value);
-        void setSampleLength (int value);
-        void setSampleWidth (int value);
-        void setItemGap (int value);
-        void setMargin (int value);
-        void setAutoSize (bool value);
-        void setAutoPosition (bool value);
+        void setLeft(int value);
+        void setHeight(int value);
+        void setWidth(int value);
+        void setVisible(bool value);
+        void setFontSize(int value);
+        void setSampleGap(int value);
+        void setSampleLength(int value);
+        void setSampleWidth(int value);
+        void setItemGap(int value);
+        void setMargin(int value);
+        void setAutoSize(bool value);
+        void setAutoPosition(bool value);
+        void setFontColor(Fl_Color value);
+        void setFontFace(int value);
+        void setBackColor(Fl_Color value);
 
         int getTop();
         int getLeft();
@@ -53,6 +56,9 @@ class Legend
         int getMargin();
         bool getAutoSize();
         bool getAutoPosition();
+        Fl_Color getFontColor();
+        int getFontFace();
+        Fl_Color getBackColor();
     protected:
 
     private:
@@ -68,6 +74,9 @@ class Legend
         int sampleGap;
         int sampleLength;
         int sampleWidth;
+        int fontFace;
+        Fl_Color fontColor;
+        Fl_Color backColor;
         int itemGap;
         int margin;
         bool isAutoSize;
