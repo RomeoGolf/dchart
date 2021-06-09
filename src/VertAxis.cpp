@@ -110,7 +110,7 @@ void VertAxis::draw()
     }*/
 
     for (int i = 0; i < notches.size(); i++) {
-        fl_font(0, fontSize);
+        fl_font(fontFace, fontSize);
         fl_color(fontColor);
         fl_draw(notches[i].label.c_str(),
                 chartHelper.chartRectLeft - notches[i].w,

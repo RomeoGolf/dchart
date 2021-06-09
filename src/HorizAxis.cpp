@@ -48,7 +48,7 @@ void HorizAxis::draw()
         ss << val;        std::string xLabelString = ss.str();
         int labelWidth = fl_width(xLabelString.data());
 
-        fl_font(0, fontSize);
+        fl_font(fontFace, fontSize);
         fl_color(fontColor);
         fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
         xLabelValue = /*round*/((xLabelValue + step) * 1) / 1;

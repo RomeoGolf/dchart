@@ -21,6 +21,7 @@ BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
     gridWidth = 1;
     fontColor = FL_BLACK;
     fontSize = 14;
+    fontFace = 0;
 
     isFixed = false;
     isAutoZoom = true;
@@ -271,5 +272,15 @@ void BasicAxis::setGridWidth(int value)
 void BasicAxis::setGridDashes(char* const value)
 {
     gridDashes = value;
+}
+
+int BasicAxis::getFontFace()
+{
+    return fontFace;
+}
+
+void BasicAxis::setFontFace(int value)
+{
+    fontFace = value;
 }
 

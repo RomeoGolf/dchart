@@ -46,6 +46,8 @@ class BasicAxis
 
         int getFontSize();
         void setFontSize(int value);
+        int getFontFace();
+        void setFontFace(int value);
         Fl_Color getGridColor();
         void setGridColor(Fl_Color value);
         Fl_Color getFontColor();
@@ -94,6 +96,7 @@ class BasicAxis
         double axisShift;
 
         int fontSize;
+        int fontFace;
         Fl_Color fontColor;
         Fl_Color gridColor;
         int gridStyle;
