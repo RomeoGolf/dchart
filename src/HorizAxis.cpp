@@ -91,6 +91,7 @@ void HorizAxis::calcStep()
 
 void HorizAxis::zoomByMouse()
 {
+    if (isFixed) return;
     double oldCoeff;
     double oldVisibleMax;
     double oldVisibleMin;
@@ -109,6 +110,7 @@ void HorizAxis::zoomByMouse()
 
 void HorizAxis::shiftByMouse()
 {
+    if (isFixed) return;
     if (sizeCoeff != 0) {
         axisShift = (mouseNowX - mouseStartX) / sizeCoeff;
     } else {
