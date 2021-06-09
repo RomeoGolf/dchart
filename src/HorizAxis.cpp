@@ -54,7 +54,7 @@ void HorizAxis::draw()
         xLabelValue = /*round*/((xLabelValue + step) * 1) / 1;
 
         fl_color(gridColor);
-        fl_line_style(FL_DOT, 1);
+        fl_line_style(gridStyle, gridWidth, gridDashes);
         fl_line(x, chartHelper.chartRectTop, x, chartHelper.chartRectBottom);
         nextX += step;
         x = chartHelper.chartRectLeft + ceil(nextX * sizeCoeff);

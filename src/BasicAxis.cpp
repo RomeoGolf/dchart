@@ -1,5 +1,7 @@
 #include "BasicAxis.h"
 
+#include <Fl/Fl_Draw.h>
+
 #include <math.h>
 
 #include <iostream>
@@ -14,6 +16,9 @@ BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
     seriesNum = 0;
 
     gridColor = FL_BLUE;
+    gridDashes = nullptr;
+    gridStyle = FL_DOT;
+    gridWidth = 1;
     fontColor = FL_BLACK;
     fontSize = 14;
 
@@ -241,5 +246,30 @@ void BasicAxis::setGridColor(Fl_Color value)
 void BasicAxis::setFontColor(Fl_Color value)
 {
     fontColor = value;
+}
+
+int BasicAxis::getGridStyle()
+{
+    return gridStyle;
+}
+
+void BasicAxis::setGridStyle(int value)
+{
+    gridStyle = value;
+}
+
+int BasicAxis::getGridWidth()
+{
+    return gridWidth;
+}
+
+void BasicAxis::setGridWidth(int value)
+{
+    gridWidth = value;
+}
+
+void BasicAxis::setGridDashes(char* const value)
+{
+    gridDashes = value;
 }
 

@@ -116,7 +116,7 @@ void VertAxis::draw()
                 chartHelper.chartRectLeft - notches[i].w,
                 b_bottom - notches[i].h);
         fl_color(gridColor);
-        fl_line_style(FL_DOT, 1);
+        fl_line_style(gridStyle, gridWidth, gridDashes);
         fl_line(chartHelper.chartRectLeft - 5, b_bottom - notches[i].y,
                 chartHelper.chartRectRight, b_bottom - notches[i].y);
     }

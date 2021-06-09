@@ -50,6 +50,11 @@ class BasicAxis
         void setGridColor(Fl_Color value);
         Fl_Color getFontColor();
         void setFontColor(Fl_Color value);
+        int getGridStyle();
+        void setGridStyle(int value);
+        int getGridWidth();
+        void setGridWidth(int value);
+        void setGridDashes(char* const value);
 
         virtual void draw() = 0;
         virtual void zoomByMouse() = 0;
@@ -91,6 +96,9 @@ class BasicAxis
         int fontSize;
         Fl_Color fontColor;
         Fl_Color gridColor;
+        int gridStyle;
+        int gridWidth;
+        char* gridDashes;
 
         void setSizeCoeff();
         void calcStartMarkUnit();
