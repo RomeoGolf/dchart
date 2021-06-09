@@ -133,7 +133,7 @@ void VertAxis::zoomByMouse()
     if (sizeCoeff != 0) {
         oldCoeff = sizeCoeff;
         height1 = chartHelper.chartRectBottom - chartHelper.chartRectTop;
-        height2 = chartHelper.marginTop; // + chartHelper.legendHeight
+        height2 = chartHelper.chartRectTop; // + chartHelper.legendHeight
         visibleMaximum = visibleMinimum + (height1 - mouseStartY + height2) / oldCoeff;
         visibleMinimum = visibleMinimum + (height1 - mouseNowY + height2) / oldCoeff;
     } else {
