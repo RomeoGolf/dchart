@@ -24,22 +24,7 @@ void LineSeries::draw()
     int xStart = getFloorIndexOfX(horizAxis->getVisibleMinimum());
     int xEnd = getFloorIndexOfX(horizAxis->getVisibleMaximum());
     if (xEnd + 1 < data.size()) xEnd++;
-    /*
-    fl_begin_line();
-    double vMinimum = vertAxis->getVisibleMinimum();
-    double hMinimum = horizAxis->getVisibleMinimum();
-    for (int i = xStart; i <= xEnd; i++) {
-        double x = data[i].xValue - hMinimum;
-        double y = data[i].yValue - vMinimum;
 
-        int cx = ceil(x * horizAxis->getSizeCoeff()) + chartHelper.marginLeft;
-        int cy = ceil(chartHelper.chartRectBottom - y * vertAxis->getSizeCoeff());
-
-        fl_vertex(cx, cy);
-    }
-    fl_end_line();
-    */
-    /**/
     double vMinimum = vertAxis->getVisibleMinimum();
     double hMinimum = horizAxis->getVisibleMinimum();
     for (int i = xStart + 1; i <= xEnd; i++) {

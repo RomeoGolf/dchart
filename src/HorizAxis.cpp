@@ -26,16 +26,13 @@ void HorizAxis::draw()
     pixelSize = (chartHelper.chartRectRight - chartHelper.chartRectLeft);
     if (pixelSize < 5) return;
 
-    visibleMinimum = /*round*/(visibleMinimum * 1) / 1;
-    visibleMaximum = /*round*/(visibleMaximum * 1) / 1;
-
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
 
     if (!isVisible) return;
 
-    startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 1) / 1;
+    startlabelValue = visibleMinimum + startMarkUnit;
 
     double xLabelValue = startlabelValue;
     double nextX = startMarkUnit;
@@ -45,13 +42,14 @@ void HorizAxis::draw()
         std::stringstream ss;
         double val = round(xLabelValue * 1000) / 1000;
         val = (fabs(val) < std::numeric_limits<double>::epsilon() ? 0 : val);
-        ss << val;        std::string xLabelString = ss.str();
+        ss << val;
+        std::string xLabelString = ss.str();
         int labelWidth = fl_width(xLabelString.data());
 
         fl_font(fontFace, fontSize);
         fl_color(fontColor);
         fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
-        xLabelValue = /*round*/((xLabelValue + step) * 1) / 1;
+        xLabelValue = xLabelValue + step;
 
         fl_color(gridColor);
         fl_line_style(gridStyle, gridWidth, gridDashes);
@@ -79,12 +77,9 @@ void HorizAxis::calcStep()
 
     if (step > 1) {
         step = (div(ceil(step), multipl).quot + 1) * multipl;
-        //step = round(step / 5) * 5;
     } else {
         step = 0.5;
-        //step = pow(10, degree - 0);
         step = pow(10, floor(log10(gap)) - 0);
-        //step = round(step * 10) / 10;
     }
 
     if ((step > 1) && (step < 10)) step = 5;
@@ -118,7 +113,7 @@ void HorizAxis::shiftByMouse()
         axisShift = 0;
         // exception?
     }
-    visibleMaximum = /*round*/((oldVisibleMaximum - axisShift) * 1) / 1;
-    visibleMinimum = /*round*/((oldVisibleMinimum - axisShift) * 1) / 1;
+    visibleMaximum = oldVisibleMaximum - axisShift;
+    visibleMinimum = oldVisibleMinimum - axisShift;
 }
 

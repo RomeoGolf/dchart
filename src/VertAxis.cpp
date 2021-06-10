@@ -29,7 +29,6 @@ VertAxis::~VertAxis()
     //dtor
 }
 
-
 void VertAxis::calcStep()
 {
     int labelSize = fl_height();
@@ -55,12 +54,9 @@ void VertAxis::calcStep()
 
     if (step > 1) {
         step = (div(ceil(step), multipl).quot + 1) * multipl;
-        //step = round(step / 5) * 5;
     } else {
-        //step = 0.5;
         step = pow(10, floor(log10(gap)) - 0);
     }
-    //step = 1;
 }
 
 void VertAxis::draw()
@@ -75,7 +71,7 @@ void VertAxis::draw()
 
     if (!isVisible) return;
 
-    startlabelValue = /*round*/((visibleMinimum + startMarkUnit) * 10) / 10;
+    startlabelValue = ((visibleMinimum + startMarkUnit) * 10) / 10;
 
     double yLabelValue = startlabelValue;
     double nextY = startMarkUnit;
@@ -99,15 +95,10 @@ void VertAxis::draw()
         n.h = y - (labelHeight - fl_descent()) / 2;
         n.y = y;
         notches.push_back(n);
-        yLabelValue = /*round*/((yLabelValue + step) * 10) / 10;
+        yLabelValue = ((yLabelValue + step) * 10) / 10;
         nextY = nextY + step;
         y = ceil(nextY * sizeCoeff);
     }
-
-    /*int maxLabelWidth = 0;
-    for (int i; i < notches.size(); i++) {
-        if (maxLabelWidth < notches[i].w) maxLabelWidth = notches[i].w;
-    }*/
 
     for (int i = 0; i < notches.size(); i++) {
         fl_font(fontFace, fontSize);
@@ -133,7 +124,7 @@ void VertAxis::zoomByMouse()
     if (sizeCoeff != 0) {
         oldCoeff = sizeCoeff;
         height1 = chartHelper.chartRectBottom - chartHelper.chartRectTop;
-        height2 = chartHelper.chartRectTop; // + chartHelper.legendHeight
+        height2 = chartHelper.chartRectTop;
         visibleMaximum = visibleMinimum + (height1 - mouseStartY + height2) / oldCoeff;
         visibleMinimum = visibleMinimum + (height1 - mouseNowY + height2) / oldCoeff;
     } else {
@@ -152,6 +143,6 @@ void VertAxis::shiftByMouse()
         axisShift = 0;
         // exception?
     }
-    visibleMaximum = /*round*/((oldVisibleMaximum + axisShift) * 10) / 10;
+    visibleMaximum = ((oldVisibleMaximum + axisShift) * 10) / 10;
     visibleMinimum = /*round*/((oldVisibleMinimum + axisShift) * 10) / 10;
 }

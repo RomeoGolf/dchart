@@ -28,10 +28,6 @@ class DChartBase : public Fl_Widget
         std::vector<std::shared_ptr<BasicSeries>> series;
         void addLineSeries();
 
-
-        //std::shared_ptr <BasicAxis> defaultHorizAxis;
-        //std::shared_ptr <BasicAxis> defaultVertAxis;
-
         std::vector<std::shared_ptr <BasicAxis>> horizAxes;
         std::vector<std::shared_ptr <BasicAxis>> vertAxes;
 

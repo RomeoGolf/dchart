@@ -27,7 +27,6 @@ class BasicSeries
         virtual ~BasicSeries();
 
         virtual void draw() = 0;
-        //virtual void addXY(double x, double y) = 0;
 
         std::vector<SeriesData<double>> data;
         void setHorizAxis(std::shared_ptr <BasicAxis> value);

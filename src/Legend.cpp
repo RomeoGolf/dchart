@@ -45,15 +45,10 @@ void Legend::draw()
             int startX = left + margin + legendData[i][j].startX;
             fl_color(fontColor);
             fl_draw(legendData[i][j].caption.c_str(), startX + sampleLength + sampleGap, y);
-            //std::cout << "[legend draw] caption: " << legendData[i][j].caption
-            //    << " x: " << legendData[i][j].startX << std::endl;
             fl_color(legendData[i][j].color);
             fl_line_style(FL_SOLID, sampleWidth);
             fl_line(startX, y + fl_descent() - fl_height() / 2,
                     startX + sampleLength, y + fl_descent() - fl_height() / 2);
-            //fl_line(startX , y + fl_descent() - fl_height() / 2 + 5,
-            //        startX + sampleLength + sampleGap + itemGap + fl_width("Series_3"), y + fl_descent() - fl_height() / 2 + 5);
-
         }
         y += margin + fl_height() - fl_descent();
     }

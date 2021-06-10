@@ -18,12 +18,8 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     needWidgetBorder = true;
     needChartBorder = true;
 
-    //defaultHorizAxis = std::make_shared<HorizAxis>(this->chartHelper);
-    //defaultVertAxis = std::make_shared<VertAxis>(this->chartHelper);
     horizAxes.push_back(std::make_shared<HorizAxis>(this->chartHelper));
     vertAxes.push_back(std::make_shared<VertAxis>(this->chartHelper));
-
-    //defaultVertAxis->setIsFixed(true);
 }
 
 DChartBase::~DChartBase()
@@ -33,11 +29,6 @@ DChartBase::~DChartBase()
 
 void DChartBase::draw()
 {
-    //chartHelper.chartRectTop = chartHelper.marginTop;
-    //chartHelper.chartRectBottom = h() - chartHelper.marginBottom;
-    //chartHelper.chartRectLeft = chartHelper.marginLeft;
-    //chartHelper.chartRectRight = w() - chartHelper.marginRight;
-
     Fl_Offscreen oscr = fl_create_offscreen(w(), h());
     {
         fl_begin_offscreen(oscr);
@@ -46,8 +37,6 @@ void DChartBase::draw()
         drawChartBorder();
         draw_label();
 
-        //defaultHorizAxis->draw();
-        //defaultVertAxis->draw();
         std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
         for (axisItem = vertAxes.begin(); axisItem != vertAxes.end(); ++axisItem) {
             (*axisItem)->draw();
@@ -76,7 +65,6 @@ void DChartBase::draw()
 
 void DChartBase::test()
 {
-    //std::string s = "Икс -> " + std::to_string(this->x());
     std::string s = "Икс -> " + std::to_string(mouseStartX);
     fl_draw(s.data(), 15, this->x() + 30, this->y() + 50);
 
@@ -118,7 +106,6 @@ int DChartBase::handle(int event)
         mouseStartX = Fl::event_x() - x();
         mouseStartY = Fl::event_y() - y();
 
-        /**/
         {
             std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
             for (axisItem = vertAxes.begin(); axisItem != vertAxes.end(); ++axisItem)
@@ -132,12 +119,6 @@ int DChartBase::handle(int event)
                 (*axisItem)->setMouseStartY(mouseStartY);
             }
         }
-        /*
-        defaultHorizAxis->setMouseStartX(mouseStartX);
-        defaultHorizAxis->setMouseStartY(mouseStartY);
-        defaultVertAxis->setMouseStartX(mouseStartX);
-        defaultVertAxis->setMouseStartY(mouseStartY);
-        */
 
         switch (Fl::event_button())
         {
@@ -158,12 +139,6 @@ int DChartBase::handle(int event)
                         (*axisItem)->setOldVisibleMinimum((*axisItem)->getVisibleMinimum());
                     }
                 }
-                /*
-                defaultHorizAxis->setOldVisibleMaximum(defaultHorizAxis->getVisibleMaximum());
-                defaultHorizAxis->setOldVisibleMinimum(defaultHorizAxis->getVisibleMinimum());
-                defaultVertAxis->setOldVisibleMaximum(defaultVertAxis->getVisibleMaximum());
-                defaultVertAxis->setOldVisibleMinimum(defaultVertAxis->getVisibleMinimum());
-                */
 
                 isRightMouseButtonDown = true;
             break;
@@ -199,16 +174,6 @@ int DChartBase::handle(int event)
                             (*axisItem)->zoomByMouse();
                         }
                     }
-
-                    /*
-                    defaultHorizAxis->setMouseNowX(mouseNowX);
-                    defaultHorizAxis->setMouseNowY(mouseNowY);
-                    defaultHorizAxis->zoomByMouse();
-
-                    defaultVertAxis->setMouseNowX(mouseNowX);
-                    defaultVertAxis->setMouseNowY(mouseNowY);
-                    defaultVertAxis->zoomByMouse();
-                    */
                     chartHelper.isZoomed = true;
                 }
                 redraw();
@@ -240,16 +205,6 @@ int DChartBase::handle(int event)
                     (*axisItem)->shiftByMouse();
                 }
             }
-            /*
-            defaultHorizAxis->setMouseNowX(mouseNowX);
-            defaultHorizAxis->setMouseNowY(mouseNowY);
-            defaultHorizAxis->shiftByMouse();
-
-            defaultVertAxis->setMouseNowX(mouseNowX);
-            defaultVertAxis->setMouseNowY(mouseNowY);
-            defaultVertAxis->shiftByMouse();
-            */
-
             redraw();
         }
         return 1;
@@ -270,15 +225,11 @@ void DChartBase::drawChartBorder()
 {
     if (needChartBorder) {
         fl_draw_box(FL_EMBOSSED_BOX,
-                    /*x() + chartHelper.marginLeft,
-                    y() + chartHelper.marginTop,
-                    w() - chartHelper.marginRight - chartHelper.marginLeft,
-                    h() - chartHelper.marginBottom - chartHelper.marginTop,*/
                     chartHelper.chartRectLeft,
                     chartHelper.chartRectTop,
                     chartHelper.chartRectRight - chartHelper.chartRectLeft,
                     chartHelper.chartRectBottom - chartHelper.chartRectTop,
-                 FL_BACKGROUND_COLOR);
+                    FL_BACKGROUND_COLOR);
     }
 }
 
@@ -286,8 +237,6 @@ void DChartBase::addLineSeries()
 {
     series.push_back(std::make_shared<LineSeries>(chartHelper));
 
-    //series.back()->setHorizAxis(defaultHorizAxis);
-    //series.back()->setVertAxis(defaultVertAxis);
     series.back()->setHorizAxis(horizAxes[0]);
     series.back()->setVertAxis(vertAxes[0]);
 
@@ -311,18 +260,12 @@ void DChartBase::unZoom()
     {
         (*axisItem)->unZoom();
     }
-    //defaultHorizAxis->unZoom();
-    //defaultVertAxis->unZoom();
-
     chartHelper.isZoomed = false;
 }
 
 void DChartBase::resize(int x, int y, int w, int h)
 {
-    //std::cout << "[resize before] w " << this->w() << std::endl;
     Fl_Widget::resize(x, y, w, h);
-    //std::cout << "[resize after] w " << this->w() << std::endl;
-
     setChartRectSize(w, h);
     legend.calcSize(series);
 }

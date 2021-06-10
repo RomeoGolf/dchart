@@ -1,7 +1,5 @@
 #include "BasicSeries.h"
 
-
-
 #include <math.h>
 #include <iostream>
 #include <algorithm>
@@ -19,21 +17,7 @@ BasicSeries::~BasicSeries()
 {
     //dtor
 }
-/*
-void BasicSeries::addXY(double x, double y)
-{
-    data.push_back(SeriesData<double>(x, y));
-    isSorted = false;
 
-    minX = x < minX ? x : minX;
-    minY = y < minY ? y : minY;
-    maxX = x > maxX ? x : maxX;
-    maxY = y > maxY ? y : maxY;
-
-    horizAxis->doAutoSize(minX, maxX);
-    vertAxis->doAutoSize(minY, maxY);
-}
-*/
 int BasicSeries::getFloorIndexOfX(double x)
 {
     if (x >= data.back().xValue)
@@ -53,7 +37,6 @@ int BasicSeries::getFloorIndexOfX(double x)
             xStart = i;
         }
     }
-
     return xStart;
 }
 
