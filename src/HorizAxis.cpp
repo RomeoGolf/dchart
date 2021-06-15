@@ -40,7 +40,8 @@ void HorizAxis::draw()
     int x = chartHelper.chartRectLeft + ceil(startMarkUnit * sizeCoeff);
     while (x <= chartHelper.chartRectRight) {
         std::stringstream ss;
-        double val = round(xLabelValue * 1000) / 1000;
+        //double val = round(xLabelValue * 1000) / 1000;
+        double val = xLabelValue;
         val = (fabs(val) < std::numeric_limits<double>::epsilon() ? 0 : val);
         ss << val;
         std::string xLabelString = ss.str();
@@ -61,28 +62,37 @@ void HorizAxis::draw()
 
 void HorizAxis::calcStep()
 {
-    double gap = visibleMaximum - visibleMinimum;
+    double gap = fabs(visibleMaximum - visibleMinimum);
+    double absMax = std::max(fabs(visibleMinimum), fabs(visibleMaximum));
 
-    int degree = 1;
-
-    if (gap == 0) {
+    int degree = ceil(log10(fabs(absMax)));
+    if (gap <= std::numeric_limits<double>::epsilon()) {
         step = 10;
         return;
+    } else if (gap >= 1) {
+        fl_font(fontFace, fontSize);
+        int labelWidth = fl_width("W") * (degree + 1);
+        int maxLines = (chartHelper.chartRectRight - chartHelper.chartRectLeft)
+                         / (labelWidth + labelWidth / 2) + 2;
+        if (maxLines <= 0) maxLines = 1;
+        step = gap / maxLines;
+
+
+        double coeff = pow(10, floor(log10(gap)) - 1);
+        if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
+        step = round(step / coeff) * coeff;
     } else {
-        degree = ceil(log10(gap)) - 2;
+        double gapDegree = ceil(log10(gap));
+        int labelWidth = fl_width("W") * (degree + 2 + (-gapDegree + 2));
+        int maxLines = (chartHelper.chartRectRight - chartHelper.chartRectLeft)
+                         / (labelWidth + labelWidth) + 3;
+        if (maxLines <= 0) maxLines = 1;
+
+        step = gap / maxLines;
+        double coeff = pow(10, floor(log10(gap)) - 1);
+        if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
+        step = round(step / coeff) * coeff;
     }
-    int multipl = ceil(pow(10, degree));
-
-    step = div(ceil(gap), 7).quot;
-
-    if (step > 1) {
-        step = (div(ceil(step), multipl).quot + 1) * multipl;
-    } else {
-        step = 0.5;
-        step = pow(10, floor(log10(gap)) - 0);
-    }
-
-    if ((step > 1) && (step < 10)) step = 5;
 }
 
 void HorizAxis::zoomByMouse()
