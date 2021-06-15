@@ -44,7 +44,7 @@ void BasicAxis::unZoom()
 void BasicAxis::setSizeCoeff()
 {
     visibleUnitSize = visibleMaximum - visibleMinimum;
-    if (fabs(visibleUnitSize) < 2.2250738585072014e-308) {
+    if (fabs(visibleUnitSize) < std::numeric_limits<double>::epsilon()) {
         sizeCoeff = 1;
     } else {
         sizeCoeff = pixelSize / visibleUnitSize;
@@ -53,7 +53,7 @@ void BasicAxis::setSizeCoeff()
 
 void BasicAxis::calcStartMarkUnit()
 {
-    if (fabs(step) > 2.2250738585072014e-308) {
+    if (fabs(step) > std::numeric_limits<double>::epsilon()) {
         startMarkUnit = step - modf(visibleMinimum / step, nullptr) * step;
         startMarkUnit = ((modf(startMarkUnit / step, nullptr) * step) * 1) / 1;
     } else {
