@@ -31,31 +31,24 @@ VertAxis::~VertAxis()
 
 void VertAxis::calcStep()
 {
+    pixelSize = chartHelper.chartRectBottom - chartHelper.chartRectTop;
     int labelSize = fl_height();
-    int maxLabelNum = (pixelSize - labelSize * 2) / labelSize;
-    if (maxLabelNum == 0) {
-        maxLabelNum = 1;
-    }
-    step = ceil(visibleMaximum - visibleMinimum) / maxLabelNum;
 
-    double gap = visibleMaximum - visibleMinimum;
+    double gap = fabs(visibleMaximum - visibleMinimum);
+    double absMax = std::max(fabs(visibleMinimum), fabs(visibleMaximum));
+    int degree = ceil(log10(fabs(absMax)));
 
-    int degree = 1;
-
-    if (gap == 0) {
+    if (gap <= std::numeric_limits<double>::epsilon()) {
         step = 10;
         return;
     } else {
-        degree = ceil(log10(gap)) - 2;
-    }
-    int multipl = ceil(pow(10, degree));
+        int maxLines = (pixelSize) / (labelSize * 4) + 2;
+        if (maxLines <= 0) maxLines = 1;
+        step = gap / maxLines;
 
-    step = div(ceil(gap), 10).quot;
-
-    if (step > 1) {
-        step = (div(ceil(step), multipl).quot + 1) * multipl;
-    } else {
-        step = pow(10, floor(log10(gap)) - 0);
+        double coeff = pow(10, floor(log10(gap)) - 1);
+        if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
+        step = round(step / coeff) * coeff;
     }
 }
 
@@ -64,7 +57,7 @@ void VertAxis::draw()
     pixelSize = (chartHelper.chartRectBottom - chartHelper.chartRectTop);
     if (pixelSize < 5) return;
 
-    fl_font(0, fontSize);
+    fl_font(fontFace, fontSize);
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
@@ -80,7 +73,6 @@ void VertAxis::draw()
     int b_bottom = chartHelper.chartRectBottom + 0;
     int b_top = chartHelper.chartRectTop;
     std::vector<Notch> notches;
-
 
     while (y <= (b_bottom - b_top)) {
         Notch n;
