@@ -21,15 +21,19 @@ HorizAxis::~HorizAxis()
     //dtor
 }
 
-void HorizAxis::draw()
+void HorizAxis::prepareNotches()
 {
     pixelSize = (chartHelper.chartRectRight - chartHelper.chartRectLeft);
-    if (pixelSize < 5) return;
 
     setSizeCoeff();
     calcStep();
     calcStartMarkUnit();
+    calcThickness();
+}
 
+void HorizAxis::draw(int delta)
+{
+    if (pixelSize < 5) return;
     if (!isVisible) return;
 
     startlabelValue = visibleMinimum + startMarkUnit;
@@ -49,7 +53,8 @@ void HorizAxis::draw()
 
         fl_font(fontFace, fontSize);
         fl_color(fontColor);
-        fl_draw(xLabelString.data(), x - (labelWidth / 2), chartHelper.chartRectBottom + 20);
+        fl_draw(xLabelString.data(), x - (labelWidth / 2),
+                chartHelper.chartRectBottom + margin + (fl_height() - fl_descent()) + delta);
         xLabelValue = xLabelValue + step;
 
         fl_color(gridColor);
@@ -76,7 +81,6 @@ void HorizAxis::calcStep()
                          / (labelWidth + labelWidth / 2) + 2;
         if (maxLines <= 0) maxLines = 1;
         step = gap / maxLines;
-
 
         double coeff = pow(10, floor(log10(gap)) - 1);
         if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
@@ -125,5 +129,11 @@ void HorizAxis::shiftByMouse()
     }
     visibleMaximum = oldVisibleMaximum - axisShift;
     visibleMinimum = oldVisibleMinimum - axisShift;
+}
+
+void HorizAxis::calcThickness()
+{
+    fl_font(fontFace, fontSize);
+    fieldThickness = fl_height() + margin * 2;
 }
 

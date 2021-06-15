@@ -10,12 +10,14 @@ class HorizAxis : public BasicAxis
         HorizAxis(ChartHelper &chartHelper);
         virtual ~HorizAxis();
 
-        void draw() override;
+        void draw(int delta) override;
         void zoomByMouse() override;
         void shiftByMouse() override;
         void calcStep();
+        virtual void prepareNotches() override;
 
     protected:
+        void calcThickness();
 
     private:
 };

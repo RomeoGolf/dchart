@@ -3,17 +3,10 @@
 #include <Fl/fl_draw.h>
 
 #include <math.h>
-#include <string>
+
 #include <sstream>
-#include <vector>
 
 #include <iostream>
-
-struct Notch {
-    std::string label;
-    int x, y;
-    int h, w;
-};
 
 VertAxis::VertAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
@@ -52,7 +45,30 @@ void VertAxis::calcStep()
     }
 }
 
-void VertAxis::draw()
+void VertAxis::draw(int delta)
+{
+    for (int i = 0; i < notches.size(); i++) {
+        fl_font(fontFace, fontSize);
+        fl_color(fontColor);
+        fl_draw(notches[i].label.c_str(),
+                chartHelper.chartRectLeft - notches[i].w - delta,
+                chartHelper.chartRectBottom - notches[i].h);
+        fl_color(gridColor);
+        fl_line_style(gridStyle, gridWidth, gridDashes);
+        fl_line(chartHelper.chartRectLeft - notchLength,
+                chartHelper.chartRectBottom - notches[i].y,
+                chartHelper.chartRectRight,
+                chartHelper.chartRectBottom - notches[i].y);
+        if (delta > 0) {
+            fl_line(chartHelper.chartRectLeft - notchLength - delta,
+                    chartHelper.chartRectBottom - notches[i].y,
+                    chartHelper.chartRectLeft - delta,
+                    chartHelper.chartRectBottom - notches[i].y);
+        }
+    }
+}
+
+void VertAxis::prepareNotches()
 {
     pixelSize = (chartHelper.chartRectBottom - chartHelper.chartRectTop);
     if (pixelSize < 5) return;
@@ -70,11 +86,10 @@ void VertAxis::draw()
     double nextY = startMarkUnit;
     int y = ceil(startMarkUnit * sizeCoeff);
 
-    int b_bottom = chartHelper.chartRectBottom + 0;
-    int b_top = chartHelper.chartRectTop;
-    std::vector<Notch> notches;
+    //std::vector<Notch> notches;
+    notches.clear();
 
-    while (y <= (b_bottom - b_top)) {
+    while (y <= (chartHelper.chartRectBottom - chartHelper.chartRectTop)) {
         Notch n;
         std::stringstream ss;
         double val = round(yLabelValue * 1000) / 1000;
@@ -91,18 +106,7 @@ void VertAxis::draw()
         nextY = nextY + step;
         y = ceil(nextY * sizeCoeff);
     }
-
-    for (int i = 0; i < notches.size(); i++) {
-        fl_font(fontFace, fontSize);
-        fl_color(fontColor);
-        fl_draw(notches[i].label.c_str(),
-                chartHelper.chartRectLeft - notches[i].w,
-                b_bottom - notches[i].h);
-        fl_color(gridColor);
-        fl_line_style(gridStyle, gridWidth, gridDashes);
-        fl_line(chartHelper.chartRectLeft - 5, b_bottom - notches[i].y,
-                chartHelper.chartRectRight, b_bottom - notches[i].y);
-    }
+    calcThickness();
 }
 
 void VertAxis::zoomByMouse()
@@ -125,6 +129,7 @@ void VertAxis::zoomByMouse()
     }
 }
 
+
 void VertAxis::shiftByMouse()
 {
     if (isFixed) return;
@@ -138,3 +143,14 @@ void VertAxis::shiftByMouse()
     visibleMaximum = ((oldVisibleMaximum + axisShift) * 10) / 10;
     visibleMinimum = /*round*/((oldVisibleMinimum + axisShift) * 10) / 10;
 }
+
+void VertAxis::calcThickness()
+{
+    fl_font(fontFace, fontSize);
+    double result = 0;
+    for (int i = 0; i < notches.size(); ++i) {
+        result = std::max(result, fl_width(notches[i].label.c_str()));
+    }
+    fieldThickness = ceil(result) + margin * 2 + notchLength;
+}
+

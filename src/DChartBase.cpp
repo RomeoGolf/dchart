@@ -14,6 +14,8 @@ DChartBase::DChartBase(int x, int y, int w, int h, const char *label) :
     chartHelper.marginLeft = 70;
     chartHelper.marginRight = 20;
     chartHelper.isAutoMarginTop = true;
+    chartHelper.isAutoMarginLeft = true;
+    chartHelper.isAutoMarginBottom = true;
 
     needWidgetBorder = true;
     needChartBorder = true;
@@ -33,16 +35,52 @@ void DChartBase::draw()
     {
         fl_begin_offscreen(oscr);
 
+        if (chartHelper.isAutoMarginLeft) {
+            int leftSpace = 0;
+            std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
+            for (axisItem = vertAxes.begin(); axisItem != vertAxes.end(); ++axisItem) {
+                if ((*axisItem)->getVisible()) {
+                    (*axisItem)->prepareNotches();
+                    leftSpace += (*axisItem)->getFieldThickness();
+                }
+            }
+            chartHelper.chartRectLeft = leftSpace;
+        }
+
+        if (chartHelper.isAutoMarginBottom) {
+            int bottomSpace = 0;
+            std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
+            for (axisItem = horizAxes.begin(); axisItem != horizAxes.end(); ++axisItem) {
+                if ((*axisItem)->getVisible()) {
+                    (*axisItem)->prepareNotches();
+                    bottomSpace += (*axisItem)->getFieldThickness();
+                }
+            }
+            chartHelper.chartRectBottom = h() - bottomSpace;
+        }
+
+
         drawWidgetBorder();
         drawChartBorder();
         draw_label();
 
+        int delta = 0;
         std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
         for (axisItem = vertAxes.begin(); axisItem != vertAxes.end(); ++axisItem) {
-            (*axisItem)->draw();
+            if ((*axisItem)->getVisible()) {
+                (*axisItem)->prepareNotches();
+                (*axisItem)->draw(delta);
+                delta += (*axisItem)->getFieldThickness();
+            }
         }
+
+        delta = 0;
         for (axisItem = horizAxes.begin(); axisItem != horizAxes.end(); ++axisItem) {
-            (*axisItem)->draw();
+            if ((*axisItem)->getVisible()) {
+                (*axisItem)->prepareNotches();
+                (*axisItem)->draw(delta);
+                delta += (*axisItem)->getFieldThickness();
+            }
         }
 
         if(isZoom) {

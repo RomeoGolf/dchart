@@ -23,6 +23,9 @@ BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
     fontSize = 14;
     fontFace = 0;
 
+    margin = 5;
+    notchLength = 5;
+
     isFixed = false;
     isAutoZoom = true;
     isAutoSize = true;
@@ -280,5 +283,30 @@ int BasicAxis::getFontFace()
 void BasicAxis::setFontFace(int value)
 {
     fontFace = value;
+}
+
+int BasicAxis::getMargin()
+{
+    return margin;
+}
+
+void BasicAxis::setMargin(int value)
+{
+    margin = value;
+}
+
+int BasicAxis::getFieldThickness()
+{
+    return fieldThickness;
+}
+
+int BasicAxis::getNotchLength()
+{
+    return notchLength;
+}
+
+void BasicAxis::setNotchLength(int value)
+{
+    notchLength = value;
 }
 

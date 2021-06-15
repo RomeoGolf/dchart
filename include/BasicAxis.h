@@ -58,9 +58,16 @@ class BasicAxis
         void setGridWidth(int value);
         void setGridDashes(char* const value);
 
-        virtual void draw() = 0;
+        int getMargin();
+        void setMargin(int value);
+        int getNotchLength();
+        void setNotchLength(int value);
+        int getFieldThickness();
+
+        virtual void draw(int delta) = 0;
         virtual void zoomByMouse() = 0;
         virtual void shiftByMouse() = 0;
+        virtual void prepareNotches() = 0;
         void unZoom();
 
     protected:
@@ -103,8 +110,13 @@ class BasicAxis
         int gridWidth;
         char* gridDashes;
 
+        int fieldThickness;
+        int margin;
+        int notchLength;
+
         void setSizeCoeff();
         void calcStartMarkUnit();
+        virtual void calcThickness() = 0;
 
     private:
         int seriesNum;

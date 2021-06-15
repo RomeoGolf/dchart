@@ -30,6 +30,8 @@ class ChartHelper
         bool isZoomed;
 
         bool isAutoMarginTop;
+        bool isAutoMarginLeft;
+        bool isAutoMarginBottom;
 
         int getRarestColorIndex();
         std::vector<int> colorIndicesUsing;
