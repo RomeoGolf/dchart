@@ -84,6 +84,9 @@ void HorizAxis::calcStep()
 
         double coeff = pow(10, floor(log10(gap)) - 1);
         if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
+        if (step / coeff < 1) {
+            coeff = pow(10, floor(log10(step)) - 0);
+        }
         step = round(step / coeff) * coeff;
     } else {
         double gapDegree = ceil(log10(gap));
@@ -95,6 +98,9 @@ void HorizAxis::calcStep()
         step = gap / maxLines;
         double coeff = pow(10, floor(log10(gap)) - 1);
         if (coeff < std::numeric_limits<double>::epsilon()) coeff = 1;
+        if (step / coeff < 1) {
+            coeff = pow(10, floor(log10(step)) - 0);
+        }
         step = round(step / coeff) * coeff;
     }
 }
