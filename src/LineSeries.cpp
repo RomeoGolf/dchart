@@ -33,9 +33,9 @@ void LineSeries::draw()
         double x2 = data[i].xValue - hMinimum;
         double y2 = data[i].yValue - vMinimum;
 
-        int cx1 = ceil(x1 * horizAxis->getSizeCoeff()) + chartHelper.marginLeft;
+        int cx1 = ceil(x1 * horizAxis->getSizeCoeff()) + chartHelper.chartRectLeft;
         int cy1 = ceil(chartHelper.chartRectBottom - y1 * vertAxis->getSizeCoeff());
-        int cx2 = ceil(x2 * horizAxis->getSizeCoeff()) + chartHelper.marginLeft;
+        int cx2 = ceil(x2 * horizAxis->getSizeCoeff()) + chartHelper.chartRectLeft;
         int cy2 = ceil(chartHelper.chartRectBottom - y2 * vertAxis->getSizeCoeff());
 
         fl_line(cx1, cy1, cx2, cy2);

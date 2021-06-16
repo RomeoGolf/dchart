@@ -59,7 +59,6 @@ void DChartBase::draw()
             chartHelper.chartRectBottom = h() - bottomSpace;
         }
 
-
         drawWidgetBorder();
         drawChartBorder();
         draw_label();
@@ -310,9 +309,35 @@ void DChartBase::resize(int x, int y, int w, int h)
 
 void DChartBase::setChartRectSize(int w, int h)
 {
+    if (chartHelper.isAutoMarginLeft) {
+        int leftSpace = 0;
+        std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
+        for (axisItem = vertAxes.begin(); axisItem != vertAxes.end(); ++axisItem) {
+            if ((*axisItem)->getVisible()) {
+                (*axisItem)->prepareNotches();
+                leftSpace += (*axisItem)->getFieldThickness();
+            }
+        }
+        chartHelper.chartRectLeft = leftSpace;
+    } else {
+        chartHelper.chartRectLeft = chartHelper.marginLeft;
+    }
+
+    if (chartHelper.isAutoMarginBottom) {
+        int bottomSpace = 0;
+        std::vector<std::shared_ptr<BasicAxis>>::const_iterator axisItem;
+        for (axisItem = horizAxes.begin(); axisItem != horizAxes.end(); ++axisItem) {
+            if ((*axisItem)->getVisible()) {
+                (*axisItem)->prepareNotches();
+                bottomSpace += (*axisItem)->getFieldThickness();
+            }
+        }
+        chartHelper.chartRectBottom = h - bottomSpace;
+    } else {
+        chartHelper.chartRectBottom = h - chartHelper.marginBottom;
+    }
+
     chartHelper.chartRectTop = chartHelper.marginTop;
-    chartHelper.chartRectBottom = h - chartHelper.marginBottom;
-    chartHelper.chartRectLeft = chartHelper.marginLeft;
     chartHelper.chartRectRight = w - chartHelper.marginRight;
 }
 
