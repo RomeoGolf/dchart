@@ -6,6 +6,7 @@
 //#include <iostream>
 #include <string>
 #include <sstream>
+#include <limits>
 
 HorizAxis::HorizAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {

@@ -7,7 +7,7 @@
 #include <sstream>
 
 #include <iostream>
-
+#include <limits>
 VertAxis::VertAxis(ChartHelper &chartHelper) : BasicAxis(chartHelper)
 {
     //ctor

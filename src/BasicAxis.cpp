@@ -1,10 +1,11 @@
 #include "BasicAxis.h"
 
-#include <Fl/Fl_Draw.h>
+#include <FL/fl_draw.h>
 
 #include <math.h>
 
 #include <iostream>
+#include <limits>
 
 BasicAxis::BasicAxis(ChartHelper &chartHelper) : chartHelper(chartHelper)
 {
@@ -57,8 +58,9 @@ void BasicAxis::setSizeCoeff()
 void BasicAxis::calcStartMarkUnit()
 {
     if (fabs(step) > std::numeric_limits<double>::epsilon()) {
-        startMarkUnit = step - modf(visibleMinimum / step, nullptr) * step;
-        startMarkUnit = ((modf(startMarkUnit / step, nullptr) * step) * 1) / 1;
+        double temp;
+        startMarkUnit = step - modf(visibleMinimum / step, &temp) * step;
+        startMarkUnit = ((modf(startMarkUnit / step, &temp) * step) * 1) / 1;
     } else {
         startMarkUnit = 0;
     }

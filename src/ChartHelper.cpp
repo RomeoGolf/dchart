@@ -1,9 +1,7 @@
 #include "ChartHelper.h"
 
-
 #include <math.h>
-
-
+#include <limits>
 
 ChartHelper::ChartHelper()
 {
